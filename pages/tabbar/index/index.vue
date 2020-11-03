@@ -28,11 +28,8 @@
 		methods: {
 			getLabel(){
 				//调用云函数方法
-				uniCloud.callFunction({
-					name:'get_label'//这个值是在云函数的/cloudfunctions-aliyun/get_label/index.js里的get_label目录
-				}).then(data =>{
-					const {result} = data;
-					this.tabList = result.data;
+				this.$api.getLabel({}).then(data =>{
+					this.tabList = data.data;
 				}).catch(err =>{
 					console.info(err);
 				});

@@ -31,7 +31,7 @@
 	}
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
 	.tab{
 		display: flex;
 		width: 100%;
