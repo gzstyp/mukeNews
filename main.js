@@ -1,9 +1,9 @@
 import Vue from 'vue'
 import App from './App'
-import _index from './common/api/index.js';
+import exports from './common/api/exports.js';
 
 Vue.config.productionTip = false;
-Vue.prototype.$api = _index;
+Vue.prototype.$api = exports;
 
 App.mpType = 'app'
 
