@@ -29,7 +29,9 @@
 			getLabel(){
 				//调用云函数方法
 				this.$api.getLabel({}).then(data =>{
-					this.tabList = data.data;
+          if(200 === data.code){
+            this.tabList = data.data;
+          }
 				}).catch(err =>{
 					console.info(err);
 				});
@@ -39,5 +41,5 @@
 </script>
 
 <style lang="scss">
-	
+
 </style>
