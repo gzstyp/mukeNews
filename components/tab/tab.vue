@@ -23,8 +23,18 @@
 				default(){
 					return []
 				}
-			}
+			},
+      tabIndex : {
+        type : Number,
+        default : 0
+      }
 		},
+    //监听 props 或 data 的值
+    watch : {
+      tabIndex(value){
+        this.activeIndex = value;
+      }
+    },
 		data() {
 			return {
         activeIndex : 0
@@ -42,7 +52,7 @@
 	}
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss">
 	.tab{
 		display: flex;
 		width: 100%;

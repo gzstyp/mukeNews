@@ -11,7 +11,7 @@
 <script>
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss">
   .list-scroll{
     height: 100%;
   }

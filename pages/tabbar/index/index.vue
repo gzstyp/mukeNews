@@ -2,10 +2,11 @@
 	<view class="home">
 		<!-- 自定义导航栏 -->
 		<navbar></navbar>
-		<!-- 标签 -->
-		<tab :list="tabList" @tab="tab"></tab>
+		<!-- 标签，tabIndex是页面向标签联动 -->
+		<tab :list="tabList" :tabIndex="tabIndex" @tab="tab"></tab>
     <view class="home-list">
-      <list></list>
+      <!-- activeIndex标签向页面联动 -->
+      <list :tab="tabList" :activeIndex="activeIndex" @change="change"></list>
     </view>
 	</view>
 </template>
@@ -19,14 +20,20 @@
 		data() {
 			return {
 				title: 'Hello',
-				tabList : []
+				tabList : [],
+        tabIndex : 0,
+        activeIndex : 0
 			}
 		},
 		onLoad() {
 			this.getLabel();
 		},
 		methods: {
+      change(current){
+        this.tabIndex = current;
+      },
       tab({data,index}){
+        this.activeIndex = index;
       },
 			getLabel(){
 				//调用云函数方法
@@ -42,7 +49,7 @@
 	}
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss">
   page{
     height: 100%;
     display: flex;
@@ -55,7 +62,6 @@
     .home-list{
       flex:1;
       box-sizing:border-box;
-      border: 1px solid #f00;
     }
   }
 </style>

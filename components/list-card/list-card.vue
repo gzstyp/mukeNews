@@ -78,7 +78,7 @@
 	}
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss">
   .listcard{
     display: flex;
     padding: 10px;

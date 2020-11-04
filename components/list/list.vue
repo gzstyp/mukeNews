@@ -1,12 +1,6 @@
 <template>
-	<swiper class="home-swiper">
-	  <swiper-item class="swiper-item">
-      <list-item></list-item>
-    </swiper-item>
-    <swiper-item class="swiper-item">
-      <list-item></list-item>
-    </swiper-item>
-    <swiper-item class="swiper-item">
+	<swiper class="home-swiper" :current="activeIndex" @change="change">
+	  <swiper-item v-for="(item,index) in tab" :key="index" class="swiper-item">
       <list-item></list-item>
     </swiper-item>
 	</swiper>
@@ -18,15 +12,33 @@
     components:{
       listItem
     },
+    props : {
+      tab : {
+        type : Array,
+        default(){
+          return []
+        }
+      },
+      activeIndex : {
+        type : Number,
+        default : 0
+      }
+    },
 		data() {
 			return {
 
 			};
-		}
+		},
+    methods:{
+      change(e){
+        const {current} = e.detail;
+        this.$emit('change',current);//发送给调用页面
+      }
+    }
 	}
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss">
   .home-swiper{
     height: 100%;
     .swiper-item{
