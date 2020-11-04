@@ -5,7 +5,9 @@
 		<!-- 标签 -->
 		<tab :list="tabList" @tab="tab"></tab>
     <list-scroll>
-      <list-card v-for="item in 5"></list-card>
+      <list-card mode="base"></list-card>
+      <list-card mode="image"></list-card>
+      <list-card mode="column"></list-card>
     </list-scroll>
 	</view>
 </template>

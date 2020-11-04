@@ -1,7 +1,7 @@
 <template>
 	<view>
     <!-- 基础卡片-->
-    <!-- <view class="listcard">
+    <view v-if="mode === 'base'" class="listcard">
       <view class="listcard-image">
         <image src="/static/logo.png" mode="aspectFill"></image>
       </view>
@@ -18,10 +18,9 @@
           <view class="listcard-content_browse">1浏览</view>
         </view>
       </view>
-    </view> -->
-
+    </view>
     <!-- 多图模式 -->
-    <!-- <view class="listcard mode-column">
+    <view v-if="mode === 'column'" class="listcard mode-column">
       <view class="listcard-content">
         <view class="listcard-content_title">
           <text>据外媒报道,美国白宫附近发生冲突2人被捕,该抗议活动发生在大选投票当日,很多反对特朗普的民众聚集在白宫外面,其中还有一些反对种族歧视的抗议者,他们与白宫警方发生了</text>
@@ -40,9 +39,9 @@
           <view class="listcard-content_browse">1浏览</view>
         </view>
       </view>
-    </view> -->
+    </view>
     <!-- 大图模式 -->
-    <view class="listcard mode-image">
+    <view v-if="mode === 'image'" class="listcard mode-image">
       <view class="listcard-image">
         <image src="/static/logo.png" mode="aspectFill"></image>
       </view>
@@ -65,6 +64,12 @@
 
 <script>
 	export default {
+    props : {
+      mode : {
+        type : String,
+        default:'base'
+      }
+    },
 		data() {
 			return {
 
@@ -102,7 +107,7 @@
         font-size: 14px;
         color:#333;
         font-weight:400;
-        line-height: 1.2;
+        line-height: 1.3;
         text{
           overflow: hidden;/* 文字多了之后要隐藏 */
           text-overflow: ellipsis;
@@ -118,9 +123,9 @@
         .listcard-content_label{
           display: flex;
           .listcard-content_item{
-            padding: 0 5px;
+            padding: 0 6px;
             margin-right: 5px;
-            border-radius: 15px;
+            border-radius: 4px;
             color: $mk-base-color;
             border: 1px solid $mk-base-color;
           }
