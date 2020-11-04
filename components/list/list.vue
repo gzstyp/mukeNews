@@ -1,7 +1,7 @@
 <template>
 	<swiper class="home-swiper" :current="activeIndex" @change="change">
 	  <swiper-item v-for="(item,index) in tab" :key="index" class="swiper-item">
-      <list-item></list-item>
+      <list-item :list="list"></list-item>
     </swiper-item>
 	</swiper>
 </template>
@@ -24,15 +24,28 @@
         default : 0
       }
     },
-		data() {
-			return {
-
-			};
-		},
+    data() {
+      return {
+        list:[]
+      };
+    },
+    //注意:onLoad 是在页面有效,created在组件里有效
+    created() {
+      this.getList();
+    },
     methods:{
       change(e){
         const {current} = e.detail;
         this.$emit('change',current);//发送给调用页面
+      },
+      getList(){
+        this.$api.get_list({}).then(data =>{
+          if(200 === data.code){
+            this.list = data.data;
+          }
+        }).catch(err =>{
+          console.info(err);
+        });
       }
     }
 	}

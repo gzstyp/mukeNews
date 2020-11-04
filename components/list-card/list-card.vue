@@ -1,61 +1,61 @@
 <template>
 	<view>
     <!-- 基础卡片-->
-    <view v-if="mode === 'base'" class="listcard">
+    <view v-if="item.mode === 'base'" class="listcard">
       <view class="listcard-image">
-        <image src="/static/logo.png" mode="aspectFill"></image>
+        <image :src="item.cover[0]" mode="aspectFill"></image>
       </view>
       <view class="listcard-content">
         <view class="listcard-content_title">
-          <text>据外媒报道,美国白宫附近发生冲突2人被捕,该抗议活动发生在大选投票当日,很多反对特朗普的民众聚集在白宫外面,其中还有一些反对种族歧视的抗议者,他们与白宫警方发生了</text>
+          <text>{{item.title}}</text>
         </view>
         <view class="listcard-content_des">
           <view class="listcard-content_label">
             <view class="listcard-content_item">
-              前端
+              {{item.classify}}
             </view>
           </view>
-          <view class="listcard-content_browse">1浏览</view>
+          <view class="listcard-content_browse">{{item.browse_count || 1}}浏览</view>
         </view>
       </view>
     </view>
     <!-- 多图模式 -->
-    <view v-if="mode === 'column'" class="listcard mode-column">
+    <view v-if="item.mode === 'column'" class="listcard mode-column">
       <view class="listcard-content">
         <view class="listcard-content_title">
-          <text>据外媒报道,美国白宫附近发生冲突2人被捕,该抗议活动发生在大选投票当日,很多反对特朗普的民众聚集在白宫外面,其中还有一些反对种族歧视的抗议者,他们与白宫警方发生了</text>
+          <text>{{item.title}}</text>
         </view>
         <view class="listcard-image">
-          <view v-for="(item,index) in 3" :key="index" class="listcard-image_item">
-            <image src="/static/logo.png" mode="aspectFill"></image>
+          <view v-if="index < 3" v-for="(subItem,index) in item.cover" :key="index" class="listcard-image_item">
+            <image :src="subItem" mode="aspectFill"></image>
           </view>
         </view>
         <view class="listcard-content_des">
           <view class="listcard-content_label">
             <view class="listcard-content_item">
-              前端
+              {{item.classify}}
             </view>
           </view>
-          <view class="listcard-content_browse">1浏览</view>
+          <view class="listcard-content_browse">{{item.browse_count || 1}}浏览</view>
         </view>
       </view>
     </view>
     <!-- 大图模式 -->
-    <view v-if="mode === 'image'" class="listcard mode-image">
+    <view v-if="item.mode === 'image'" class="listcard mode-image">
       <view class="listcard-image">
-        <image src="/static/logo.png" mode="aspectFill"></image>
+        <image :src="item.cover[0]" mode="aspectFill"></image>
       </view>
       <view class="listcard-content">
         <view class="listcard-content_title">
-          <text>据外媒报道,该抗议活动发生在大选投票当日,他们与白宫警方发生了</text>
+          <text>{{item.title}}</text>
         </view>
         <view class="listcard-content_des">
           <view class="listcard-content_label">
             <view class="listcard-content_item">
-              前端
+              {{item.classify}}
             </view>
           </view>
-          <view class="listcard-content_browse">1浏览</view>
+          <view class="listcard-content_browse">{{item.browse_count || 1}}浏览</view>
         </view>
       </view>
     </view>
@@ -65,16 +65,18 @@
 <script>
 	export default {
     props : {
-      mode : {
-        type : String,
-        default:'base'
+      item : {
+        type : Object,
+        default(){
+          return {}
+        }
       }
     },
-		data() {
-			return {
+	data() {
+		return {
 
-			};
-		}
+		};
+	}
 	}
 </script>
 

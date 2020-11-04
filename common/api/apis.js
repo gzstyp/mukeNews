@@ -8,8 +8,8 @@ function request(name_url,params){
 export const getLabel = (params) =>{
 	return request('get_label',params);
 }
-//获取数据列表,用法 this.$api.getListContent({}).then(data =>{}).catch(err =>{});
-export const getListContent = (params) =>{
+//获取数据列表,用法 this.$api.get_list({}).then(data =>{}).catch(err =>{});
+export const get_list = (params) =>{
 	return request('get_list',params);
 }
 //收藏或取消收藏,用法 this.$api.updateLikes({}).then(data =>{}).catch(err =>{});
