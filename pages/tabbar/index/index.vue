@@ -4,11 +4,9 @@
 		<navbar></navbar>
 		<!-- 标签 -->
 		<tab :list="tabList" @tab="tab"></tab>
-    <list-scroll>
-      <list-card mode="base"></list-card>
-      <list-card mode="image"></list-card>
-      <list-card mode="column"></list-card>
-    </list-scroll>
+    <view class="home-list">
+      <list></list>
+    </view>
 	</view>
 </template>
 
@@ -44,7 +42,7 @@
 	}
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
   page{
     height: 100%;
     display: flex;
@@ -54,5 +52,10 @@
     flex-direction:column;//垂直排列
     flex: 1;
     overflow: hidden;
+    .home-list{
+      flex:1;
+      box-sizing:border-box;
+      border: 1px solid #f00;
+    }
   }
 </style>
