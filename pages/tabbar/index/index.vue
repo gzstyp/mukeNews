@@ -4,15 +4,9 @@
 		<navbar></navbar>
 		<!-- 标签 -->
 		<tab :list="tabList" @tab="tab"></tab>
-    <view class="scroll">
-      <scroll-view class="list-scroll" scroll-y>
-        <view>
-          <view v-for="item in 100">
-          	{{item}}内容
-          </view>
-        </view>
-      </scroll-view>
-    </view>
+    <list-scroll>
+      <list-card v-for="item in 5"></list-card>
+    </list-scroll>
 	</view>
 </template>
 
@@ -57,16 +51,6 @@
     display: flex;
     flex-direction:column;//垂直排列
     flex: 1;
-    border: 1px solid #007AFF;
-    .scroll{
-      flex: 1;
-      box-sizing: border-box;
-      overflow: hidden;
-      .list-scroll{
-        height: 100%;
-        display: flex;
-        flex-direction:column;//垂直排列
-      }
-    }
+    overflow: hidden;
   }
 </style>
