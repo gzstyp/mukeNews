@@ -42,10 +42,13 @@
       change(e){
         const {current} = e.detail;
         this.$emit('change',current);//发送给调用页面
-        this.getList(current);
+        const catch_data = this.listCatchData[current];
+        //当没有数据时再去请求数据
+        if(!catch_data || catch_data.length ===0){
+          this.getList(current);
+        }
       },
       getList(current){
-        console.info(this.tab)
         this.$api.get_list({name:this.tab[current].name}).then(data =>{
           if(200 === data.code){
             this.$set(this.listCatchData,current,data.data);//懒加载,通知页面的数组或对象已发生变化,进行刷新

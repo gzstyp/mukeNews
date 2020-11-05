@@ -19,7 +19,6 @@
 		},
 		data() {
 			return {
-				title: 'Hello',
 				tabList : [],
         tabIndex : 0,
         activeIndex : 0
@@ -39,6 +38,8 @@
 				//调用云函数方法
 				this.$api.getLabel({}).then(data =>{
           if(200 === data.code){
+            // unshift()方法可向数组的开头添加一个或更多元素，并返回新的长度。该方法将改变数组的数目；若将新项添加到数组末尾，请使用 push()方法
+            data.data.unshift({name:'全部'});
             this.tabList = data.data;
           }
 				}).catch(err =>{
