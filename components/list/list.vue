@@ -1,7 +1,7 @@
 <template>
 	<swiper class="home-swiper" :current="activeIndex" @change="change">
 	  <swiper-item v-for="(item,index) in tab" :key="index" class="swiper-item">
-      <list-item :list="listCatchData[index]"></list-item>
+      <list-item :list="listCatchData[index]" :load="load[index]" @loadmore="loadmore"></list-item>
     </swiper-item>
 	</swiper>
 </template>
@@ -26,8 +26,10 @@
     },
     data() {
       return {
-        list:[],
-        listCatchData:{}//用于缓存,解决页面数据闪屏的问题
+        list : [],
+        listCatchData : {},//用于缓存,解决页面数据闪屏的问题
+        load : {},
+        pageSize : 10
       };
     },
     watch:{
@@ -38,7 +40,13 @@
     },
     //注意:onLoad 是在页面有效,created在组件里有效
     created() {},
-    methods:{
+    methods : {
+      // 此自定义事件是从 list-scroll.vue 到 list-item.vue 再到 list.vue 本页面
+      loadmore(){
+        if(this.load[this.activeIndex].loading === 'noMore') return;
+        this.load[this.activeIndex].page++;
+        this.getList(this.activeIndex);
+      },
       change(e){
         const {current} = e.detail;
         this.$emit('change',current);//发送给调用页面
@@ -49,9 +57,34 @@
         }
       },
       getList(current){
-        this.$api.get_list({name:this.tab[current].name}).then(data =>{
-          if(200 === data.code){
-            this.$set(this.listCatchData,current,data.data);//懒加载,通知页面的数组或对象已发生变化,进行刷新
+        if(!this.load[current]){
+          this.load[current] = {
+            page : 1,
+            loading : 'loading'
+          }
+        }
+        this.$api.get_list(
+          {
+            name : this.tab[current].name,
+            page : this.load[current].page,
+            pageSize : this.pageSize
+          }
+        ).then(result =>{
+          const {code,data} = result;
+          //if(code === 201){
+          if(data.length ===0){
+            let oldLoad = {};
+            oldLoad.loading = 'noMore';
+            oldLoad.page = this.load[current].page;
+            this.$set(this.load,current,oldLoad);
+            this.$forceUpdate();//强制刷新页面
+            return;
+          }
+          if(200 === code){
+            let oldList = this.listCatchData[current] || [];//没有时默认空数组
+            oldList.push(...data);
+            this.$set(this.listCatchData,current,oldList);//懒加载,通知页面的数组或对象已发生变化,进行刷新
+            //console.log(this.listCatchData);
           }
         }).catch(err =>{
           console.info(err);

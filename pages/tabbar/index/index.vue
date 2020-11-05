@@ -30,6 +30,7 @@
 		methods: {
       change(current){
         this.tabIndex = current;
+        this.activeIndex = current;
       },
       tab({data,index}){
         this.activeIndex = index;

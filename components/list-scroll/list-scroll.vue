@@ -1,6 +1,6 @@
 <template>
 	<view class="scroll">
-	  <scroll-view class="list-scroll" scroll-y>
+	  <scroll-view class="list-scroll" scroll-y @scrolltolower="loadmore">
 	    <view>
 	      <slot></slot>
 	    </view>
@@ -14,7 +14,12 @@
 			return {
 
 			};
-		}
+		},
+    methods:{
+      loadmore(event){
+        this.$emit('loadmore');//发送给 list-item.vue,路线：list-scroll.vue 到 list-item.vue 再到 list.vue
+      }
+    }
 	}
 </script>
 
