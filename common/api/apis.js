@@ -12,8 +12,8 @@ export const getLabel = (params) =>{
 export const get_list = (params) =>{
 	return request('get_list',params);
 }
-//收藏或取消收藏,用法 this.$api.updateLikes({}).then(data =>{}).catch(err =>{});
-export const updateLikes = (params) =>{
+//收藏或取消收藏,用法 this.$api.updateLike({}).then(data =>{}).catch(err =>{});
+export const updateLike = (params) =>{
 	return request('update_like',params);
 }
 //搜索列表,用法 this.$api.getSearch({}).then(data =>{}).catch(err =>{});
