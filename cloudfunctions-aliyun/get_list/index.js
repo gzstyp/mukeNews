@@ -26,7 +26,7 @@ exports.main = async (event, context) => {
   /* let list = await db.collection('article')
   .field({content:false})//即过滤到content字段，false是不返回 content 字段的数据,如果是true的话,仅返回 content 的字段
   .get(); */
-  
+
   const code = list.data.length > 0 ? 200 : 201;
 	return {
     code : code,
