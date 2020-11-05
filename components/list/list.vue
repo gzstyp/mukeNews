@@ -1,7 +1,7 @@
 <template>
 	<swiper class="home-swiper" :current="activeIndex" @change="change">
 	  <swiper-item v-for="(item,index) in tab" :key="index" class="swiper-item">
-      <list-item :list="list"></list-item>
+      <list-item :list="listCatchData[index]"></list-item>
     </swiper-item>
 	</swiper>
 </template>
@@ -26,22 +26,29 @@
     },
     data() {
       return {
-        list:[]
+        list:[],
+        listCatchData:{}//用于缓存,解决页面数据闪屏的问题
       };
     },
-    //注意:onLoad 是在页面有效,created在组件里有效
-    created() {
-      this.getList();
+    watch:{
+      tab(value){
+        if(value.length ===0) return;
+        this.getList(this.activeIndex);
+      }
     },
+    //注意:onLoad 是在页面有效,created在组件里有效
+    created() {},
     methods:{
       change(e){
         const {current} = e.detail;
         this.$emit('change',current);//发送给调用页面
+        this.getList(current);
       },
-      getList(){
-        this.$api.get_list({}).then(data =>{
+      getList(current){
+        console.info(this.tab)
+        this.$api.get_list({name:this.tab[current].name}).then(data =>{
           if(200 === data.code){
-            this.list = data.data;
+            this.$set(this.listCatchData,current,data.data);//懒加载,通知页面的数组或对象已发生变化,进行刷新
           }
         }).catch(err =>{
           console.info(err);
