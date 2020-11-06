@@ -25,6 +25,13 @@
 			}
 		},
 		onLoad() {
+      //接收自定义全局事件,第1个参数是事件名,参数2是传递来的数据
+      uni.$on('labelChange',(data)=>{
+        this.tabList = [];//刷新后重新赋值
+        this.tabIndex = 0;//刷新后重新赋值
+        this.activeIndex = 0;//刷新后重新赋值
+        this.getLabel();
+      });
 			this.getLabel();
 		},
 		methods: {

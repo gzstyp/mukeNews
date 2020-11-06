@@ -5,10 +5,15 @@
         <view class="label-title">我的标签</view>
         <view class="label-edit" @click="editLabel">{{is_edit ? '完成' : '编辑'}}</view>
       </view>
-      <view class="label-content">
+      <uni-load-more v-if="show" status="loading" iconType="snow"></uni-load-more>
+      <view v-if="!show" class="label-content">
         <view class="label-content_item" v-for="(item,index) in labelList" :key="item._id">
           {{item.name}}
           <uni-icons v-if="is_edit" class="icons-close" type="clear" size="20" color="#f00" @click="del(index)"/>
+        </view>
+        <!-- 且不是正在加载的状态时显示 -->
+        <view v-if="labelList.length === 0 && !show" class="no-data">
+          当前没有数据
         </view>
       </view>
     </view>
@@ -16,8 +21,13 @@
       <view class="label-header">
         <view class="label-title">标签推荐</view>
       </view>
-      <view class="label-content">
+      <uni-load-more v-if="show" status="loading" iconType="snow"></uni-load-more>
+      <view v-if="!show" class="label-content">
         <view class="label-content_item" v-for="(item,index) in list" :key="item._id" @click="add(index)">{{item.name}}</view>
+      </view>
+      <!-- 且不是正在加载的状态时显示 -->
+      <view v-if="list.length === 0 && !show" class="no-data">
+        当前没有数据
       </view>
     </view>
 	</view>
@@ -29,7 +39,8 @@
 			return {
         is_edit : false,
         labelList : [],
-        list : []
+        list : [],
+        show : true
 			}
 		},
     onLoad() {
@@ -65,16 +76,21 @@
           uni.showToast({
             title:data.msg
           });
+          // 自定义全局事件:类似于 this.$emit();事件 uni.$emit()是全局的事件,即某个数据变化了需要更新页面或刷新获取数据,它只能在已打开的页面触发,即上一页页面
+          uni.$emit('labelChange','512');//其中参数1的 labelChange 是全局的事件名,参数2是否需要传递参数,此时已触发事件了，那怎么接收事件呢?
         }).catch(err =>{
           uni.hideLoading();
         	console.info(err);
         });
       },
       getLabel(){
+        this.show = true;
         this.$api.getLabel({type : 'all'}).then(data =>{
+          this.show = false;
           this.labelList = data.data.filter(item => item.current);
           this.list = data.data.filter(item => !item.current);
         }).catch(err =>{
+          this.show = false;
         	console.info(err);
         });
       }
@@ -125,5 +141,12 @@
         }
       }
     }
+  }
+  .no-data{
+    width: 100%;
+    text-align: center;
+    padding: 40px 0;
+    color: #999;
+    font-size: 14px;
   }
 </style>
