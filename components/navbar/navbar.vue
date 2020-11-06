@@ -31,6 +31,10 @@
 <script>
 	export default {
     props : {
+      value : {
+        type : [String,Number],
+        default : ''
+      },
       isSearch : {
         type : Boolean,
         default : false
@@ -44,6 +48,12 @@
         val : ''
 			};
 		},
+    watch:{
+      //监听实时输入的内容,todo,重点!!!
+      value(newValue){
+        this.val = newValue;
+      }
+    },
 		created() {
 			//同步方法,获取手机系统系统
 			const info = uni.getSystemInfoSync();

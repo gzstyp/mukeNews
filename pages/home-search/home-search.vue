@@ -1,6 +1,7 @@
 <template>
 	<view class="home">
-		<navbar :isSearch="true" @input="change"></navbar>
+    <!-- 怎么跟我们自己自定义的组件实现数据的双向绑定呢?1先绑定v-model;2在需要传入需要改变的值,3进入到(子)组件navbar.vue里props创建一个与之对应的属性 value -->
+		<navbar :isSearch="true" v-model="value" @input="change"></navbar>
     <view class="home-list">
       <view v-if="is_history" class="label-box">
         <view class="label-header">
@@ -8,7 +9,7 @@
           <text class="label-clear">清空</text>
         </view>
         <view v-if="historyLists.length > 0" class="label-content">
-          <view class="label-content_item" v-for="(item,index) in historyLists" :key="index">
+          <view class="label-content_item" v-for="(item,index) in historyLists" :key="index" @click="openHistory(item)">
             {{item.name}}
           </view>
         </view>
@@ -44,9 +45,13 @@
       setHistory(){
         this.$store.dispatch('set_history',{name : this.value});
       },
+      openHistory(item){
+        this.value = item.name;
+        this.get_search(this.value);
+      },
       //监听输入变化
       change(value){
-        this.value = value;
+        //this.value = value; todo
         if(!value){
           clearTimeout(this.timer);
           this.mark = false;
