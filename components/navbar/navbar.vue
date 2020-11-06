@@ -19,7 +19,7 @@
 				</view>
         <!-- 是搜索页显示 -->
         <view v-else class="navbar-search">
-        	<input class="navbar-search_text" type="text" v-model="val" placeholder="请输入内容" @input="inputChange"/>
+        	<input class="navbar-search_text" type="text" v-model="val" placeholder="请输入搜索内容" @input="inputChange"/>
         </view>
 			</view>
 		</view>
