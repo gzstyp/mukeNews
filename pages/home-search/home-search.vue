@@ -2,20 +2,24 @@
 	<view class="home">
 		<navbar :isSearch="true" @input="change"></navbar>
     <view class="home-list">
-      <view class="label-box">
+      <view v-if="is_history" class="label-box">
         <view class="label-header">
           <text class="label-title">搜索历史</text>
           <text class="label-clear">清空</text>
         </view>
         <view v-if="historyLists.length > 0" class="label-content">
-          <view class="label-content_item" v-for="(item,index) in historyList" :key="index">
-            {{item}}内容
+          <view class="label-content_item" v-for="(item,index) in historyLists" :key="index">
+            {{item.name}}
           </view>
         </view>
         <view v-else class="no-data">
           没有搜索历史
         </view>
       </view>
+      <!-- 显示搜索结果 -->
+      <list-scroll v-else class="list-scroll">
+        <list-card :item="item" v-for="item in listSearch" :key="item._id"></list-card>
+      </list-scroll>
     </view>
 	</view>
 </template>
@@ -25,15 +29,54 @@
 	export default {
 		data() {
 			return {
+        is_history : true,
+        listSearch : []
 			}
 		},
     //计算数据,主要实时监听vuex里的state数据源状态变化
     computed:{
-      ...mapState(['historyLists'])//参数是数组,其中的 historyList 是定义在 state 里的,而不是上面data的那个
+      ...mapState(['historyLists'])//参数是数组,其中的 historyLists 是定义在 state 里的
     },
-		methods: {
+    //页面是onLoad,组件是created
+    onLoad() {},
+		methods : {
+      //监听输入变化
       change(value){
-        console.info(value)
+        if(!value){
+          clearTimeout(this.timer);
+          this.mark = false;
+          this.get_search(value);
+          return;
+        }
+        //做个标记,请求延时
+        if(!this.mark){
+          this.mark = true;
+          this.timer = setTimeout(()=>{
+            this.mark = false;
+            this.get_search(value);
+          },1000);
+        }
+      },
+      test(){
+        this.$store.dispatch('set_history',{name : 'te0st'});
+      },
+      get_search(value){
+        if(!value){
+          this.listSearch = [];
+          this.is_history = true;
+          return;
+        }
+        this.$api.getSearch({value : value}).then(result =>{
+          const {code,data} = result;
+          this.is_history = false;
+          if(200 === code){
+            this.listSearch = data;
+          }else if(201 === code){
+            this.listSearch = [];
+          }
+        }).catch(err =>{
+          console.info(err);
+        });
       }
 		}
 	}
@@ -49,7 +92,6 @@
     display: flex;
     flex-direction: column;
     flex: 1;
-    border: 1px solid #f00;
     .label-box{
       background-color:#fff;
       margin-bottom:10px;

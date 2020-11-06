@@ -106,6 +106,7 @@
 						margin-top: 2px;
 					}
 					.navbar-search_text{
+            width: 100%;
 						font-size: 14px;
 						color: #999;
 					}
