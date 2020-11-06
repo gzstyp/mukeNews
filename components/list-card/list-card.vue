@@ -83,7 +83,7 @@
     methods:{
       open(){
         this.$emit('click',this.item);//home-search.vue页面接收并处理click自定义事件
-        //this.$emit('setHistory',this.item);//如果正常,后期再处理
+        //todo this.$emit('setHistory',this.item);//如果正常,后期再处理
       }
     }
 	}
