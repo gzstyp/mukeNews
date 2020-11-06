@@ -7,7 +7,7 @@
           <text class="label-title">搜索历史</text>
           <text class="label-clear">清空</text>
         </view>
-        <view v-if="historyList.length > 0" class="label-content">
+        <view v-if="historyLists.length > 0" class="label-content">
           <view class="label-content_item" v-for="(item,index) in historyList" :key="index">
             {{item}}内容
           </view>
@@ -21,12 +21,16 @@
 </template>
 
 <script>
+  import {mapState} from 'vuex';
 	export default {
 		data() {
 			return {
-        historyList : []
 			}
 		},
+    //计算数据,主要实时监听vuex里的state数据源状态变化
+    computed:{
+      ...mapState(['historyLists'])//参数是数组,其中的 historyList 是定义在 state 里的,而不是上面data的那个
+    },
 		methods: {
       change(value){
         console.info(value)

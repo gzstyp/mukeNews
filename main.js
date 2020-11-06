@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import App from './App'
 import exports from './common/api/exports.js';
+import store from './store/index.js';
 
 Vue.config.productionTip = false;
 Vue.prototype.$api = exports;
@@ -8,6 +9,7 @@ Vue.prototype.$api = exports;
 App.mpType = 'app'
 
 const app = new Vue({
-    ...App,
+  store,
+  ...App,
 })
 app.$mount()
