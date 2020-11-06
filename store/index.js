@@ -12,6 +12,9 @@ const store = new Vuex.Store({
     //页面调用方式:this.$store.commit('SET_HISTORY_LISTS',history);
     SET_HISTORY_LISTS(state,history){
       state.historyLists = history;
+    },
+    CLEAR_HISTORY(state){
+      state.historyLists = [];
     }
   },
   //它和mutations的功能差不多,仅能调用mutations里的方法来修改数据源,所以它不能直接修改数据源,这里可以执行任意的异步操作
@@ -21,6 +24,10 @@ const store = new Vuex.Store({
       let list = state.historyLists;
       list.unshift(history);
       commit('SET_HISTORY_LISTS',list);//SET_HISTORY_LISTS是mutations里的方法名,history是参数的数据
+    },
+    //调用方式;this.$store.dispatch('clearHistory');
+    clearHistory({commit}){
+      commit('CLEAR_HISTORY');
     }
   }
 })

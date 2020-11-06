@@ -7,7 +7,7 @@
 			<!-- 导航栏内容,若isSearch为ture时覆盖navbar-content样式即可 -->
 			<view class="navbar-content" :class="{search:isSearch}" :style="{height:navBarHeight + 'px',width:windowWidth+'px'}" @click.stop="open">
 				<!-- 返回箭头 -->
-        <view class="navbar-content-search-icons">
+        <view v-if="isSearch" class="navbar-content-search-icons" @click="back">
           <uni-icons type="back" size="22" color="#fff"></uni-icons>
         </view>
         <!-- 非搜索页显示 -->
@@ -70,6 +70,12 @@
 			// #endif
 		},
     methods : {
+      back(){
+        //uni.navigateBack({})//在h5平台下可能会有问题,不推荐,因一开始就打开该页面那点返回还是当前页,因为页面栈之前就没有页面
+        uni.switchTab({
+          url :'/pages/tabbar/index/index'
+        })
+      },
       open(){
         if(this.isSearch) return;//是在搜索页时不跳转页面
         uni.navigateTo({

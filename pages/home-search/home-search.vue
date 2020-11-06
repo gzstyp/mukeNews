@@ -6,7 +6,7 @@
       <view v-if="is_history" class="label-box">
         <view class="label-header">
           <text class="label-title">搜索历史</text>
-          <text class="label-clear">清空</text>
+          <text class="label-clear" @click="clear">清空</text>
         </view>
         <view v-if="historyLists.length > 0" class="label-content">
           <view class="label-content_item" v-for="(item,index) in historyLists" :key="index" @click="openHistory(item)">
@@ -21,7 +21,7 @@
       <list-scroll v-else class="list-scroll">
         <uni-load-more v-if="show" status="loading" iconType="snow"></uni-load-more>
         <view v-if="listSearch.length > 0">
-          <list-card :item="item" v-for="item in listSearch" :key="item._id" @click="setHistory"></list-card>
+          <list-card :item="item" v-for="item in listSearch" :key="item._id" @setHistory="setHistory"></list-card>
         </view>
         <view v-if="listSearch.length === 0 && !show" class="no-data">
           没有搜索到相关数据
@@ -73,6 +73,12 @@
             this.get_search(value);
           },1000);
         }
+      },
+      clear(){
+        this.$store.dispatch('clearHistory');
+        uni.showToast({
+          title:'清空完成'
+        })
       },
       get_search(value){
         if(!value){
