@@ -5,7 +5,7 @@ Vue.use(Vuex);
 const store = new Vuex.Store({
   //数据源
   state : {
-    historyLists : []
+    historyLists : uni.getStorageSync('__history') || []
   },
   //提供修改数据源的方法;对外提供修改数据源[state]的方法,它可以改变 state 数据源的数据
   mutations : {
@@ -23,10 +23,12 @@ const store = new Vuex.Store({
     set_history({commit,state},history){//第1个参数是对象,其commit可以调用mutations里的方法;第2个参数history是调用端传递过来的数据
       let list = state.historyLists;
       list.unshift(history);
+      uni.setStorageSync('__history',list);
       commit('SET_HISTORY_LISTS',list);//SET_HISTORY_LISTS是mutations里的方法名,history是参数的数据
     },
     //调用方式;this.$store.dispatch('clearHistory');
     clearHistory({commit}){
+      uni.removeStorageSync('__history');
       commit('CLEAR_HISTORY');
     }
   }
