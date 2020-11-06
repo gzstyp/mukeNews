@@ -19,7 +19,13 @@
       </view>
       <!-- 显示搜索结果 -->
       <list-scroll v-else class="list-scroll">
-        <list-card :item="item" v-for="item in listSearch" :key="item._id" @click="setHistory"></list-card>
+        <uni-load-more v-if="show" status="loading" iconType="snow"></uni-load-more>
+        <view v-if="listSearch.length > 0">
+          <list-card :item="item" v-for="item in listSearch" :key="item._id" @click="setHistory"></list-card>
+        </view>
+        <view v-if="listSearch.length === 0 && !show" class="no-data">
+          没有搜索到相关数据
+        </view>
       </list-scroll>
     </view>
 	</view>
@@ -32,7 +38,8 @@
 			return {
         value : '',
         is_history : true,
-        listSearch : []
+        listSearch : [],
+        show : false
 			}
 		},
     //计算数据,主要实时监听vuex里的state数据源状态变化
@@ -73,15 +80,18 @@
           this.is_history = true;
           return;
         }
+        this.show = true;
         this.$api.getSearch({value : value}).then(result =>{
-          const {code,data} = result;
+          this.show = false;
           this.is_history = false;
+          const {code,data} = result;
           if(200 === code){
             this.listSearch = data;
           }else if(201 === code){
             this.listSearch = [];
           }
         }).catch(err =>{
+          this.show = false;
           console.info(err);
         });
       }
