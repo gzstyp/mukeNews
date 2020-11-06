@@ -20,3 +20,6 @@ export const updateLike = (params) =>{
 export const getSearch = (params) =>{
 	return request('get_search',params);
 }
+export const updateLabel = (params) =>{
+	return request('update_label',params);
+}
