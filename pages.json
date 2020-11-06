@@ -31,6 +31,14 @@
         "navigationBarTextStyle" : "white",
         "navigationStyle" : "custom"
       }
+    },
+    {
+      "path" : "pages/home-label/home-label",
+      "style" : {
+        "navigationBarTitleText" : "标签管理",
+        "enablePullDownRefresh" : false,
+        "navigationBarTextStyle" : "black"
+      }
     }
   ],
   "globalStyle" : {
