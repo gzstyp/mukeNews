@@ -4,14 +4,23 @@
 			<!-- 状态栏,解决微信小程序状态栏开始 -->
 			<view :style="{height:statusBarHeight + 'px'}"></view>
 			<!-- 解决微信小程序状态栏结束 -->
-			<!-- 导航栏内容 -->
-			<view class="navbar-content" :style="{height:navBarHeight + 'px',width:windowWidth+'px'}">
-				<view class="navbar-search">
+			<!-- 导航栏内容,若isSearch为ture时覆盖navbar-content样式即可 -->
+			<view class="navbar-content" :class="{search:isSearch}" :style="{height:navBarHeight + 'px',width:windowWidth+'px'}" @click.stop="open">
+				<!-- 返回箭头 -->
+        <view class="navbar-content-search-icons">
+          <uni-icons type="back" size="22" color="#fff"></uni-icons>
+        </view>
+        <!-- 非搜索页显示 -->
+        <view v-if="!isSearch" class="navbar-search">
 					<view class="navbar-search_icon">
 						<uni-icons type="search" size="16" color="#999"></uni-icons>
 					</view>
 					<view class="navbar-search_text">输入关键字…</view>
 				</view>
+        <!-- 是搜索页显示 -->
+        <view v-else class="navbar-search">
+        	<input class="navbar-search_text" type="text" value="" placeholder="请输入内容" />
+        </view>
 			</view>
 		</view>
 		<!-- 这个高度在小程序里的不正确的,所以要动态计算获取,状态栏的高度+导航栏的高度 -->
@@ -21,6 +30,12 @@
 
 <script>
 	export default {
+    props : {
+      isSearch : {
+        type : Boolean,
+        default : false
+      }
+    },
 		data() {
 			return {
 				statusBarHeight : 20,//默认状态栏的高度
@@ -42,7 +57,15 @@
 			this.navBarHeight = (menuButtonInfo.bottom - info.statusBarHeight) + (menuButtonInfo.top - info.statusBarHeight);
 			this.windowWidth = menuButtonInfo.left;
 			// #endif
-		}
+		},
+    methods : {
+      open(){
+        if(this.isSearch) return;//是在搜索页时不跳转页面
+        uni.navigateTo({
+          url:"/pages/home-search/home-search"
+        });
+      }
+    }
 	}
 </script>
 
@@ -78,10 +101,21 @@
 						margin-top: 2px;
 					}
 					.navbar-search_text{
-						font-size: 12px;
+						font-size: 14px;
 						color: #999;
 					}
 				}
+        //同级元素,为ture时覆盖样式即可
+        &.search{
+          padding-left: 0;
+          .navbar-content-search-icons{
+            margin-left: 10px;
+            margin-right: 10px;
+          }
+          .navbar-search{
+            border-radius: 5px;
+          }
+        }
 			}
 		}
 	}
