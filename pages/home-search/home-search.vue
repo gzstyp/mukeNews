@@ -18,7 +18,7 @@
       </view>
       <!-- 显示搜索结果 -->
       <list-scroll v-else class="list-scroll">
-        <list-card :item="item" v-for="item in listSearch" :key="item._id"></list-card>
+        <list-card :item="item" v-for="item in listSearch" :key="item._id" @click="setHistory"></list-card>
       </list-scroll>
     </view>
 	</view>
@@ -29,6 +29,7 @@
 	export default {
 		data() {
 			return {
+        value : '',
         is_history : true,
         listSearch : []
 			}
@@ -40,8 +41,12 @@
     //页面是onLoad,组件是created
     onLoad() {},
 		methods : {
+      setHistory(){
+        this.$store.dispatch('set_history',{name : this.value});
+      },
       //监听输入变化
       change(value){
+        this.value = value;
         if(!value){
           clearTimeout(this.timer);
           this.mark = false;
@@ -56,9 +61,6 @@
             this.get_search(value);
           },1000);
         }
-      },
-      test(){
-        this.$store.dispatch('set_history',{name : 'te0st'});
       },
       get_search(value){
         if(!value){
