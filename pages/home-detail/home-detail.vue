@@ -31,7 +31,7 @@
     <!-- 底部工具栏 -->
     <view class="detail-bottom">
       <!-- 左侧最外层 -->
-      <view class="detail-bottom_input">
+      <view class="detail-bottom_input" @click="openComponent">
         <text>谈谈你的看法</text>
         <uni-icons type="compose" size="16" color="#f07373"></uni-icons>
       </view>
@@ -50,6 +50,19 @@
         </view>
       </view>
     </view>
+    <!-- 如何触发呢???先指定一个组件节点,即 ref="popup" ,通过 ref可以获取组件节点的信息,可以对它进行一些操作 -->
+    <uni-popup ref="popup" type="bottom" :maskClick="false"><!-- maskClick是蒙版点击是否关闭弹窗 -->
+      <view class="popup-wrap">
+        <view class="popup-header">
+          <text class="popup-header_item" @click="close">取消</text>
+          <text class="popup-header_item" @click="submit">发布</text>
+        </view>
+        <view class="popup-content">
+          <textarea class="popup-textarea" v-model="commentsValue" maxlength="200" fixed placeholder="请输入评论内容" />
+          <view class="popup-count">{{commentsValue.length}}/200</view>
+        </view>
+      </view>
+    </uni-popup>
 	</view>
 </template>
 
@@ -62,7 +75,8 @@
 		data() {
 			return {
         formData : {},
-        noData : '<p style="text-align: center;color: #666;">详情加载中……</p>'
+        noData : '<p style="text-align: center;color: #666;">详情加载中……</p>',
+        commentsValue : ''
 			}
 		},
     onLoad(query) {
@@ -70,6 +84,21 @@
       this.getDetail();
     },
 		methods: {
+      //打开评论窗口
+      openComponent(){
+        //popup是名,即上面的 ref="popup"
+        this.$refs.popup.open();
+      },
+      //关闭弹窗
+      close(){
+        //popup是名,即上面的 ref="popup"
+        this.$refs.popup.close();
+      },
+      //发布
+      submit(){
+        this.close();
+      },
+      //获取详细信息
       getDetail(){
         this.$api.get_detail({article_id:this.formData._id}).then(data =>{
           if(200 === data.code){
@@ -83,7 +112,7 @@
 	}
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
   .detail{
     padding: 15px 0;
     padding-bottom: 54px;/* 预留底部工具栏高度 */
@@ -178,4 +207,36 @@
       }
     }
   }
+
+  .popup-wrap {
+  		background-color: #fff;
+  		.popup-header {
+  			display: flex;
+  			justify-content: space-between;
+  			font-size: 14px;
+  			color: #666;
+  			border-bottom: 1px #F5F5F5 solid;
+  			.popup-header_item {
+  				height: 50px;
+  				line-height: 50px;
+  				padding: 0 15px;
+  			}
+  		}
+  		.popup-content {
+  			width: 100%;
+  			padding: 15px;
+  			box-sizing: border-box;
+  			.popup-textarea {
+  				width: 100%;
+  				height: 200px;
+  			}
+  			.popup-count {
+  				display: flex;
+  				justify-content: flex-end;
+  				font-size: 12px;
+  				color: #999;
+  			}
+  		}
+  	}
+
 </style>

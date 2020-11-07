@@ -23,6 +23,7 @@ export const getSearch = (params) =>{
 export const updateLabel = (params) =>{
 	return request('update_label',params);
 }
+/* 获取内容详细信息,富文本渲染 */
 export const get_detail = (params) =>{
 	return request('get_detail',params);
 }
