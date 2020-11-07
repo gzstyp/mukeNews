@@ -1,24 +1,24 @@
 <template>
 	<view class="detail">
 		<view class="detail-title">
-      我是一个前端开发者,要不要去学习node.js
+      {{formData.title}}
 		</view>
     <view class="detail-header">
       <!-- 左侧是作者头像 -->
       <view class="detail-header_logo">
-        <image src="/static/logo.png" mode="aspectFill"></image>
+        <image :src="formData.author.avatar" mode="aspectFill"></image>
       </view>
       <!-- 右侧是作者信息 -->
       <view class="detail-header_content">
         <!-- 作者名字 -->
         <view class="detail-header_author">
-          meHaoTian
+          {{formData.author.author_name}}
         </view>
         <!-- 发布日期、浏览量、点赞... -->
         <view class="detail-header_date_browse">
-          <text>2020-11-07 08:42:54</text>
-          <text>512浏览</text>
-          <text>256点赞</text>
+          <text>{{formData.create_time}}</text>
+          <text>{{formData.browse_count || 1}}浏览</text>
+          <text>{{formData.thumbs_up_count || 0}}点赞</text>
         </view>
       </view>
     </view>
@@ -55,9 +55,12 @@
 	export default {
 		data() {
 			return {
-
+        formData : {}
 			}
 		},
+    onLoad(query) {
+      this.formData = JSON.parse(query.params);
+    },
 		methods: {
 
 		}
@@ -67,7 +70,7 @@
 <style lang="scss">
   .detail{
     padding: 15px 0;
-    padding-bottom: 54px;/* 底部工具栏 */
+    padding-bottom: 54px;/* 预留底部工具栏高度 */
   }
   .detail-title{
     padding: 0 15px;
@@ -112,8 +115,8 @@
   }
   .detail-content{
     height: 1000px;
-    border: 1px solid #f00;
   }
+  //底部工具栏
   .detail-bottom{
     position: fixed;
     bottom: 0;

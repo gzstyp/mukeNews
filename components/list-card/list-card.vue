@@ -82,9 +82,18 @@
     },
     methods:{
       open(){
-        this.$emit('setHistory',this.item);//home-search.vue页面接收并处理setHistory自定义事件
+        const obj = this.item;
+        this.$emit('setHistory',obj);//home-search.vue页面接收并处理setHistory自定义事件
+        const params = {
+          _id : obj._id,
+          title : obj.title,
+          author : obj.author,
+          create_time : obj.create_time,
+          thumbs_up_count : obj.thumbs_up_count,
+          browse_count : obj.browse_count
+        };
         uni.navigateTo({
-          url:'/pages/home-detail/home-detail'
+          url:'/pages/home-detail/home-detail?params='+JSON.stringify(params)
         });
       }
     }
