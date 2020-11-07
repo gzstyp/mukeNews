@@ -39,6 +39,14 @@
         "enablePullDownRefresh" : false,
         "navigationBarTextStyle" : "black"
       }
+    },
+    {
+      "path" : "pages/home-detail/home-detail",
+      "style" : {
+        "navigationBarTitleText" : "详情",
+        "enablePullDownRefresh" : false,
+        "navigationBarTextStyle" : "black"
+      }
     }
   ],
   "globalStyle" : {

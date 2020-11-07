@@ -83,6 +83,9 @@
     methods:{
       open(){
         this.$emit('setHistory',this.item);//home-search.vue页面接收并处理setHistory自定义事件
+        uni.navigateTo({
+          url:'/pages/home-detail/home-detail'
+        });
       }
     }
 	}
