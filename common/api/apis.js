@@ -27,3 +27,7 @@ export const updateLabel = (params) =>{
 export const get_detail = (params) =>{
 	return request('get_detail',params);
 }
+/* 评论的添加,用法 this.$api.update_comment({}).then(data =>{}).catch(err =>{}); */
+export const update_comment = (params) =>{
+	return request('update_comment',params);
+}

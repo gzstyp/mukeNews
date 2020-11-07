@@ -96,7 +96,35 @@
       },
       //发布
       submit(){
-        this.close();
+        if(!this.commentsValue){
+          uni.showToast({
+            title:'请输入评论内容',
+            icon:'none'
+          });
+          return;
+        }
+        this.setUpdateComment(this.commentsValue);
+      },
+      setUpdateComment(content){
+        uni.showLoading({title:'正在操作……'});
+        this.$api.update_comment(
+          {
+            article_id : this.formData._id,
+            content : content
+          }
+        ).then(data =>{
+          uni.hideLoading();
+          if(200 === data.code){
+            this.close();
+            uni.showToast({
+              title : '评论成功',
+              icon : 'none'
+            });
+          }
+        }).catch(err =>{
+          uni.hideLoading();
+          console.log(err);
+        });
       },
       //获取详细信息
       getDetail(){
