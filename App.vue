@@ -14,4 +14,5 @@
 
 <style>
 	/*每个页面公共css */
+  @import 'components/gaoyia-parse/parse.css';/* todo 富文本渲染重点,uParse 富文本解析 https://ext.dcloud.net.cn/plugin?id=183 */
 </style>

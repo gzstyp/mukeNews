@@ -24,7 +24,9 @@
     </view>
     <!-- 内容 -->
     <view class="detail-content">
-      详细信息数据
+      <view class="detail-html">
+        <html-parse :content="formData.content" :noData="noData"></html-parse>
+      </view>
     </view>
     <!-- 底部工具栏 -->
     <view class="detail-bottom">
@@ -52,17 +54,31 @@
 </template>
 
 <script>
+  import htmlParse from '@/components/gaoyia-parse/parse.vue'
 	export default {
+    components:{
+      htmlParse
+    },
 		data() {
 			return {
-        formData : {}
+        formData : {},
+        noData : '<p style="text-align: center;color: #666;">详情加载中……</p>'
 			}
 		},
     onLoad(query) {
       this.formData = JSON.parse(query.params);
+      this.getDetail();
     },
 		methods: {
-
+      getDetail(){
+        this.$api.get_detail({article_id:this.formData._id}).then(data =>{
+          if(200 === data.code){
+            this.formData = data.data;
+          }
+        }).catch(err =>{
+          console.log(err);
+        });
+      }
 		}
 	}
 </script>
@@ -114,7 +130,11 @@
     }
   }
   .detail-content{
-    height: 1000px;
+    margin-top: 20px;
+    min-height: 500px;
+    .detail-html{
+      padding: 0 15px;
+    }
   }
   //底部工具栏
   .detail-bottom{

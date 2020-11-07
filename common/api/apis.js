@@ -23,3 +23,6 @@ export const getSearch = (params) =>{
 export const updateLabel = (params) =>{
 	return request('update_label',params);
 }
+export const get_detail = (params) =>{
+	return request('get_detail',params);
+}
