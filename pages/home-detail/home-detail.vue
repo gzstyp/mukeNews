@@ -31,7 +31,7 @@
       <view class="detail-comment">
         <view class="comment-title">最新评论</view>
         <view class="comment-content" v-for="(item,index) in commentsList" :key="item.comment_id">
-          <comments-box :comments="item"/></comments-box>
+          <comments-box :comments="item" @reply="reply"></comments-box>
         </view>
       </view>
     </view>
@@ -84,7 +84,8 @@
         formData : {},
         noData : '<p style="text-align: center;color: #666;">详情加载中……</p>',
         commentsValue : '',
-        commentsList : []
+        commentsList : [],
+        replyFormData : {}//回复相关的数据
 			}
 		},
     onLoad(query) {
@@ -112,16 +113,22 @@
           });
           return;
         }
-        this.setUpdateComment(this.commentsValue);
+        this.setUpdateComment({content:this.commentsValue,...this.replyFormData});
+      },
+      //回复,有子组件交给父组件处理事件,自定义事件来实现
+      reply(comment){
+        this.replyFormData = {
+          "comment_id" : comment.comment_id
+        };
+        this.openComponent();
       },
       setUpdateComment(content){
+        const formData = {
+          article_id : this.formData._id,
+          ...content
+        };
         uni.showLoading({title:'正在操作……'});
-        this.$api.update_comment(
-          {
-            article_id : this.formData._id,
-            content : content
-          }
-        ).then(data =>{
+        this.$api.update_comment(formData).then(data =>{
           uni.hideLoading();
           if(200 === data.code){
             this.close();
@@ -129,6 +136,7 @@
               title : '评论成功',
               icon : 'none'
             });
+            this.getComments();
           }
         }).catch(err =>{
           uni.hideLoading();

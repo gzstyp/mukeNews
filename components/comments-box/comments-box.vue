@@ -13,12 +13,26 @@
     <!-- 评论内容 -->
     <view class="comments-content">
       <view>{{comments.comment_content}}</view>
+      <view class="comments-info">
+        <view class="comments-button" @click="commentsReply(comments)">回复</view>
+      </view>
+      <!-- comments.replys 防止因递归导致死循环 -->
+      <view class="comments-reply" v-for="item in comments.replys" :key="item.comment_id">
+        <!-- 递归调用 -->
+        <comments-box :comments="item"></comments-box>
+      </view>
     </view>
 	</view>
 </template>
 
 <script>
+  // 在自己组件调用自己表示 commentsBox 递归,自己引用自己
+  import commentsBox from '@/components/comments-box/comments-box.vue'
 	export default {
+    name : "comments-box",//使用递归时必须指定name
+    components:{
+      commentsBox
+    },
     props:{
       comments : {
         type : Object,
@@ -29,7 +43,12 @@
     },
 		data() {
 			return {};
-		}
+		},
+    methods:{
+      commentsReply(comment){
+        this.$emit('reply',comment)//事件丢给父组件处理
+      }
+    }
 	}
 </script>
 
@@ -67,6 +86,23 @@
       margin-top: 10px;
       font-size: 14px;
       color: #000;
+      .comments-info{
+        margin-top: 15px;
+        display: flex;
+        .comments-button{
+          padding: 2px 10px;
+          font-size: 12px;
+          color: #999;
+          border-radius: 4px;
+          border: 1px solid #ccc;
+        }
+      }
+      .comments-reply{
+        display: flex;
+        margin: 15px 0;
+        padding: 0 10px;
+        border: 1px solid #eee;
+      }
     }
   }
 </style>
