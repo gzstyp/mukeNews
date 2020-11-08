@@ -13,7 +13,7 @@ exports.main = async (event, context) => {
     author : {
       author_id : user._id,
       author_name : user.author_name,
-      avator : user.avator,
+      avatar : user.avatar,
       professional : user.professional //专业
     },
     replys : []//回复字段

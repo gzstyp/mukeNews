@@ -25,7 +25,14 @@
     <!-- 内容 -->
     <view class="detail-content">
       <view class="detail-html">
-        <html-parse :content="formData.content" :noData="noData"></html-parse>
+        <!-- <html-parse :content="formData.content" :noData="noData"></html-parse> -->
+        内容
+      </view>
+      <view class="detail-comment">
+        <view class="comment-title">最新评论</view>
+        <view class="comment-content" v-for="(item,index) in commentsList" :key="item.comment_id">
+          <comments-box :comments="item"/></comments-box>
+        </view>
       </view>
     </view>
     <!-- 底部工具栏 -->
@@ -76,12 +83,14 @@
 			return {
         formData : {},
         noData : '<p style="text-align: center;color: #666;">详情加载中……</p>',
-        commentsValue : ''
+        commentsValue : '',
+        commentsList : []
 			}
 		},
     onLoad(query) {
       this.formData = JSON.parse(query.params);
       this.getDetail();
+      this.getComments();
     },
 		methods: {
       //打开评论窗口
@@ -135,6 +144,17 @@
         }).catch(err =>{
           console.log(err);
         });
+      },
+      //请求评论数据
+      getComments(){
+        this.$api.get_comments({article_id:this.formData._id}).then(data =>{
+          if(200 === data.code){
+            this.commentsList = data.data;
+          }else if(201 === data.code){
+          }
+        }).catch(err =>{
+          console.log(err);
+        });
       }
 		}
 	}
@@ -147,9 +167,9 @@
   }
   .detail-title{
     padding: 0 15px;
-    		font-size: 18px;
-    		font-weight: bold;
-    		color: #333;
+    font-size: 18px;
+    font-weight: bold;
+    color: #333;
   }
   .detail-header{
     display: flex;
@@ -191,6 +211,19 @@
     min-height: 500px;
     .detail-html{
       padding: 0 15px;
+    }
+    .detail-comment{
+      margin-top: 30px;
+      .comment-title{
+        padding: 10px 15px;
+        font-size: 14px;
+        color: #666;
+        border-bottom: 1px solid #f5f5f5;
+      }
+      .comment-content{
+        padding: 0 15px;
+        border-top:  1px solid #eee;
+      }
     }
   }
   //底部工具栏
@@ -266,5 +299,4 @@
   			}
   		}
   	}
-
 </style>

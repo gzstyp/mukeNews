@@ -31,3 +31,7 @@ export const get_detail = (params) =>{
 export const update_comment = (params) =>{
 	return request('update_comment',params);
 }
+/* 获取评论信息,用法 this.$api.get_comments({}).then(data =>{}).catch(err =>{}); */
+export const get_comments = (params) =>{
+	return request('get_comments',params);
+}
