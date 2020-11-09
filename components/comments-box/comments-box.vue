@@ -8,7 +8,8 @@
       <view class="comments-header_info">
         <view v-if="!comments.is_reply" class="title">{{comments.author.author_name}}</view>
         <view v-else class="title">{{comments.author.author_name}}<text class="reply-text">回复</text>{{comments.to}}</view>
-        <view>{{comments.create_time}}</view>
+        <!-- 要是有多个参数就写成 formatTime('name','age');若是一个参数时可以省略参数,直接写成 formatTime -->
+        <view>{{comments.create_time | formatTime('time')}}</view>
       </view>
 		</view>
     <!-- 评论内容 -->
@@ -28,7 +29,8 @@
 
 <script>
   // 在自己组件调用自己表示 commentsBox 递归,自己引用自己
-  import commentsBox from '@/components/comments-box/comments-box.vue'
+  import commentsBox from '@/components/comments-box/comments-box.vue';
+  import {paraseTime} from '@/utils/index.js';
 	export default {
     name : "comments-box",//使用递归时必须指定name
     components:{
@@ -49,6 +51,12 @@
 		data() {
 			return {};
 		},
+    //属性计算?
+    filters:{
+      formatTime(time){
+        return paraseTime(time);
+      }
+    },
     methods:{
       commentsReply(comment){
         //区分是主回复还是子回复

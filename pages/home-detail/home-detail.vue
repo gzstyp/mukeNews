@@ -1,7 +1,7 @@
 <template>
 	<view class="detail">
 		<view class="detail-title">
-      {{formData.title}}
+      {{formData.title || '标题'}}
 		</view>
     <view class="detail-header">
       <!-- 左侧是作者头像 -->
@@ -75,10 +75,10 @@
 </template>
 
 <script>
-  import htmlParse from '@/components/gaoyia-parse/parse.vue'
+  import htmlParse from '@/components/gaoyia-parse/parse.vue';
 	export default {
     components:{
-      htmlParse
+      htmlParse,
     },
 		data() {
 			return {

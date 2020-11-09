@@ -12,8 +12,7 @@
       "path" : "pages/tabbar/follow/follow",
       "style" : {
         "navigationBarTitleText" : "关注",
-        "enablePullDownRefresh" : false,
-        "navigationStyle" : "custom"
+        "enablePullDownRefresh" : false
       }
     },
     {
@@ -76,7 +75,7 @@
       {
         "pagePath" : "pages/tabbar/follow/follow",
         "iconPath" : "static/follow.png",
-        "selectedIconPath" : "./static/follow-active.png",
+        "selectedIconPath" : "/static/follow-active.png",
         "text" : "关注"
       },
       {
