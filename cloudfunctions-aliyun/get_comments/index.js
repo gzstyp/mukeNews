@@ -5,6 +5,8 @@ const aggre = db.command.aggregate;
 exports.main = async (event, context) => {
   const user_id = event.user_id;
   const article_id = event.article_id;
+  const page = event.page || 1;//当前页数,默认为第1页,即当没有传这个参数时,那key|value就是它
+  const pageSize = event.pageSize || 10;//每页大小
   const list = await db.collection('article')
   .aggregate()
   .match({
@@ -18,6 +20,8 @@ exports.main = async (event, context) => {
   .replaceRoot({//它需要和unwind一起使用
     newRoot:'$comments'
   })
+  .skip(pageSize * (page - 1))
+  .limit(pageSize)
   .end();
   const code = list.data.length > 0 ? 200 : 201;
 	return {

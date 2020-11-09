@@ -47,6 +47,13 @@
         "enablePullDownRefresh" : false,
         "navigationBarTextStyle" : "black"
       }
+    },
+    {
+      "path" : "pages/detail-comments/detail-comments",
+      "style" : {
+        "navigationBarTitleText" : "评论列表",
+        "enablePullDownRefresh" : true
+      }
     }
   ],
   "globalStyle" : {

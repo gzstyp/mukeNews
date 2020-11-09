@@ -26,8 +26,7 @@
     <!-- 内容 -->
     <view class="detail-content">
       <view class="detail-html">
-        <!-- <html-parse :content="formData.content" :noData="noData"></html-parse> -->
-        内容
+        <html-parse :content="formData.content" :noData="noData"></html-parse>
       </view>
       <view class="detail-comment">
         <view class="comment-title">最新评论</view>
@@ -45,7 +44,8 @@
       </view>
       <!-- 右侧的3个图标 -->
       <view class="detail-bottom_icons">
-        <view class="detail-bottom_icons_box">
+        <!-- 评论 -->
+        <view class="detail-bottom_icons_box" @click="openList">
           <uni-icons type="chat" size="22" color="#f07373"></uni-icons>
         </view>
         <!-- 收藏 -->
@@ -95,6 +95,12 @@
       this.getComments();
     },
 		methods: {
+      //评论列表
+      openList(){
+        uni.navigateTo({
+          url:'/pages/detail-comments/detail-comments?id='+this.formData._id
+        })
+      },
       //点赞
       thumbsup(article_id){
         this.setUpdateThumbs(article_id);

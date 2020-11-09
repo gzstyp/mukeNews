@@ -5,8 +5,8 @@ const aggre = db.command.aggregate;
 exports.main = async (event, context) => {
   const user_id = event.user_id;
   const name = event.name;
-  const page = event.page;
-  const pageSize = event.pageSize;
+  const page = event.page;//当前页数
+  const pageSize = event.pageSize;//每页大小
   let matchObj = {};
   if(name !== '全部'){
     matchObj = {
