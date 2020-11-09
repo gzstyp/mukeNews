@@ -20,10 +20,11 @@ export const updateLike = (params) =>{
 export const getSearch = (params) =>{
 	return request('get_search',params);
 }
+//更新个人标签
 export const updateLabel = (params) =>{
 	return request('update_label',params);
 }
-/* 获取内容详细信息,富文本渲染 */
+/* 获取内容详细信息,使用富文本渲染 */
 export const get_detail = (params) =>{
 	return request('get_detail',params);
 }
