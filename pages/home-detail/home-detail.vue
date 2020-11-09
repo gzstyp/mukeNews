@@ -109,7 +109,7 @@
       submit(){
         if(!this.commentsValue){
           uni.showToast({
-            title:'请输入评论内容',
+            title:'请输入内容',
             icon:'none'
           });
           return;
