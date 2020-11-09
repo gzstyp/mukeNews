@@ -21,7 +21,7 @@
           <text>{{formData.thumbs_up_count || 0}}点赞</text>
         </view>
       </view>
-      <button class="detail-header_button" type="default" @click="follow(formData.author.id)">关注</button>
+      <button class="detail-header_button" type="default" @click="follow(formData.author.id)">{{formData.is_author_like ? '取消关注' : '关注'}}</button>
     </view>
     <!-- 内容 -->
     <view class="detail-content">
@@ -181,10 +181,10 @@
         uni.showLoading({title:'正在操作……'});
         this.$api.update_author(params).then(data =>{
           uni.hideLoading();
+          this.formData.is_author_like = !this.formData.is_author_like;
           if(200 === data.code){
-            this.close();
             uni.showToast({
-              title : data.msg,
+              title : data.msg,// this.formData.is_author_like ? '关注成功' : '取消成功'
               icon : 'none'
             });
           }
