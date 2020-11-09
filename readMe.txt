@@ -7,8 +7,13 @@
 父子关系：index.vue -> navbar.vue
 
 flex-direction: column;/* 垂直排列 */
+box-sizing: border-box;/* 若高度是100%没有看到下边框的话,加上这个就可以 */
 
 /pages/home-detail/home-detail.vue 页面详情
 /pages/detail-comments/detail-comments.vue 文章评论列表
 /pages/home-label/home-label.vue 标签管理页面
 /pages/home-label/home-search.vue 搜索页面
+
+//自定义全局事件,方便其他页面刷新数据[可以多个地方定义同一个事件名],还有一处 /pages/home-detail/home-detail.vue
+//自定义全局事件,方便其他页面刷新数据[可以多个地方定义同一个事件名],还有一处 /components/likes/likes.vue
+uni.$emit('update_article');
