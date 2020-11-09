@@ -33,7 +33,7 @@
         const params = {
           //"user_id" : "5f939ce1f10d24000162d352",
           "article_id" : this.item._id
-        }
+        };
         uni.showLoading({title:'正在操作……'});//显示正在操作动画
         this.$api.updateLike(params).then(data =>{
           uni.hideLoading();//功能时隐藏
@@ -46,8 +46,8 @@
             });
           }
         }).catch(err =>{
-          uni.hideLoading();//失败时隐藏
           console.info(err);
+          uni.hideLoading();//失败时隐藏
         });
       }
     }

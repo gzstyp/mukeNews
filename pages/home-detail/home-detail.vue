@@ -48,9 +48,9 @@
         <view class="detail-bottom_icons_box">
           <uni-icons type="chat" size="22" color="#f07373"></uni-icons>
         </view>
-        <!-- 关注 -->
-        <view class="detail-bottom_icons_box">
-          <uni-icons type="heart" size="22" color="#f07373"></uni-icons>
+        <!-- 收藏 -->
+        <view class="detail-bottom_icons_box" @click="likeTap(formData._id)">
+          <uni-icons :type="formData.is_like ? 'heart-filled' : 'heart'" size="22" color="#f07373"></uni-icons>
         </view>
         <!-- 点赞 -->
         <view class="detail-bottom_icons_box">
@@ -95,6 +95,11 @@
       this.getComments();
     },
 		methods: {
+      //收藏
+      likeTap(article_id){
+        this.setUpdateLike(article_id);
+      },
+      //关注作者
       follow(author_id){
         this.setUpdateAuthor(author_id);
       },
@@ -174,6 +179,7 @@
           console.log(err);
         });
       },
+      //关注作者
       setUpdateAuthor : function(author_id){
         const params = {
           author_id : author_id
@@ -189,7 +195,29 @@
             });
           }
         }).catch(err =>{
+          console.log(err);
           uni.hideLoading();
+        });
+      },
+      //收藏文章
+      setUpdateLike(article_id){
+        const params = {
+          "article_id" : article_id
+        };
+        uni.showLoading({title:'正在操作……'});//显示正在操作动画
+        this.$api.updateLike(params).then(data =>{
+          uni.hideLoading();//功能时隐藏
+          if(200 === data.code){
+            this.formData.is_like = !this.formData.is_like;
+            //提示操作结果
+            uni.showToast({
+              title : this.formData.is_like ? '收藏成功' : '取消成功',
+              icon : 'none'
+            });
+          }
+        }).catch(err =>{
+          console.info(err);
+          uni.hideLoading();//失败时隐藏
         });
       }
 		}
