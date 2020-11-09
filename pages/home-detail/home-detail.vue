@@ -62,10 +62,10 @@
       <view class="popup-wrap">
         <view class="popup-header">
           <text class="popup-header_item" @click="close">取消</text>
-          <text class="popup-header_item" @click="submit">发布</text>
+          <text class="popup-header_item" @click="submit">提交</text>
         </view>
         <view class="popup-content">
-          <textarea class="popup-textarea" v-model="commentsValue" maxlength="200" fixed placeholder="请输入评论内容" />
+          <textarea class="popup-textarea" v-model="commentsValue" maxlength="200" fixed placeholder="请输入内容" />
           <view class="popup-count">{{commentsValue.length}}/200</view>
         </view>
       </view>
@@ -98,6 +98,7 @@
       openComponent(){
         //popup是名,即上面的 ref="popup"
         this.$refs.popup.open();
+        this.commentsValue = '';
       },
       //关闭弹窗
       close(){
