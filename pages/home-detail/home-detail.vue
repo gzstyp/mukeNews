@@ -224,7 +224,8 @@
               title : this.formData.is_like ? '收藏成功' : '取消成功',
               icon : 'none'
             });
-            uni.$emit('update_article');
+            //自定义全局事件,方便其他页面刷新数据[可以多个地方定义同一个事件名],还有一处 /components/likes/likes.vue
+            uni.$emit('update_article','follow');//手动添加参数达到首页列表数据刷新效果
           }
         }).catch(err =>{
           console.info(err);

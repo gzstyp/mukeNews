@@ -13,6 +13,11 @@
         default(){
           return {}
         }
+      },
+      //用于区分是哪一个组件页面触发点击事件,传给自定义事件,判断这个值即可
+      types : {
+        type : String,
+        default : ''
       }
     },
 		data() {
@@ -31,7 +36,6 @@
     methods:{
       likeTap(){
         const params = {
-          //"user_id" : "5f939ce1f10d24000162d352",
           "article_id" : this.item._id
         };
         uni.showLoading({title:'正在操作……'});//显示正在操作动画
@@ -44,6 +48,8 @@
               title : this.like ? '收藏成功' : '取消成功',
               icon : 'none'
             });
+            //自定义全局事件,方便其他页面刷新数据[可以多个地方定义同一个事件名],还有一处 /pages/home-detail/home-detail.vue
+            uni.$emit('update_article',this.types);
           }
         }).catch(err =>{
           console.info(err);

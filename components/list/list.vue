@@ -40,9 +40,11 @@
     },
     //注意:onLoad 是在页面有效,created在组件里有效
     created() {
-      //全局的自定义事件,刷新页面数据
-      uni.$on('update_article',()=>{
-        this.refreshData();
+      //全局的自定义事件,刷新页面数据,它只能在已打开的页面才触发!!!
+      uni.$on('update_article',(types)=>{
+        if(types === 'follow'){
+          this.refreshData();//是 ‘页面follow.vue’发送的自定义事件
+        }
       });
     },
     methods : {

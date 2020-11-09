@@ -27,7 +27,7 @@
   .scroll{
     height: 100%;//父容器的高度应该小于子容器的高度才出现滚动条
     flex: 1;
-    box-sizing: border-box;
+    box-sizing: border-box;/* 若高度是100%没有看到下边框的话,加上这个就可以 */
     overflow: hidden;
     .list-scroll{
       height: 100%;

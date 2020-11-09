@@ -44,3 +44,7 @@ export const update_author = (params) =>{
 export const update_thumbs = (params) =>{
 	return request('update_thumbs',params);
 }
+/* 获取收藏的文章,用法 this.$api.get_follow({}).then(data =>{}).catch(err =>{}); */
+export const get_follow = (params) =>{
+	return request('get_follow',params);
+}

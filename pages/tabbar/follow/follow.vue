@@ -12,7 +12,11 @@
       <swiper class="follow-list-swiper">
         <swiper-item>
           <list-scroll>
-            <view class="" v-for="item in 100">{{item}}内容</view>
+            <uni-load-more v-if="list.length === 0 && !articleShow" iconType="snow" status="loading"></uni-load-more>
+            <list-card v-for="item in list" :key="item._id" types="follow" :item="item"></list-card>
+            <view v-if="articleShow" class="no-data">
+              没有数据
+            </view>
           </list-scroll>
         </swiper-item>
         <swiper-item>
@@ -27,18 +31,36 @@
 	export default {
 		data() {
 			return {
-        activeIndex : 0
+        activeIndex : 0,
+        list : [],
+        articleShow : false//默认不让其显示,等第1次加载玩没有数据时才显示
 			}
 		},
+    onLoad(){
+      //全局的自定义事件,刷新页面数据,它只能在已打开的页面才触发!!!
+      uni.$on('update_article',()=>{
+        this.gerFollow();
+      });
+      this.gerFollow();
+    },
 		methods: {
       tab : function(index){
         this.activeIndex = index;
+      },
+      gerFollow(){
+        this.$api.get_follow({}).then(result =>{
+          const {code,data} = result;
+          this.list = data;
+          this.articleShow = this.list.length === 0 ? true : false;//因为没有做分页
+        }).catch(err =>{
+          console.info(err);
+        });
       }
 		}
 	}
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
   page{
     height: 100%;
     display: flex;
@@ -48,7 +70,7 @@
     display: flex;
     flex-direction: column;
     flex: 1;//让页面撑起来???
-    box-sizing: border-box;
+    box-sizing: border-box;/* 若高度是100%没有看到下边框的话,加上这个就可以 */
     .follow-tab{
       height: 30px;
       padding: 10px 16px;
@@ -78,7 +100,6 @@
     }
     .follow-list{
       flex: 1;//高度直接撑开,即把剩余的宽高度撑满???
-      border: 1px solid $mk-base-color;
       .follow-list-swiper{
         height: 100%;
         .swiper-item{
@@ -86,5 +107,11 @@
         }
       }
     }
+  }
+  .no-data{
+    padding: 50px;
+    font-size: 14px;
+    color: #999;
+    text-align: center;
   }
 </style>
