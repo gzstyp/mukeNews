@@ -41,7 +41,7 @@ exports.main = async (event, context) => {
     let commentAuthor = '';
     //子回复|主回复
     if(is_reply){
-      commentAuthor = comments[commentIndex].replys.find(item =>{item.comment_id === reply_id});
+      commentAuthor = comments[commentIndex].replys.find(item =>item.comment_id === reply_id);
     }else{
       commentAuthor = comments.find(item =>item.comment_id === comment_id);
     }
