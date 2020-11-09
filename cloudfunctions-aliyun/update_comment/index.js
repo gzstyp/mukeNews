@@ -7,7 +7,9 @@ exports.main = async (event, context) => {
     user_id,
     article_id,//文章id
     content,//评论或回复的内容
-    comment_id = '' //评论id,此处给了默认值为'';它是从this.replyFormData = {"comment_id" : comment.comment_id};传递来的
+    comment_id = '', //评论id,此处给了默认值为'';它是从this.replyFormData = {"comment_id" : comment.comment_id};传递来的
+    reply_id = '',//子回复的id
+    is_reply = false //是否子回复
   } = event;
   let user = await db.collection('user').doc(user_id).get();
   user = user.data[0];//获取用户对象
@@ -19,6 +21,7 @@ exports.main = async (event, context) => {
     comment_id : getId(5),
     comment_content : content,
     create_time : new Date().getTime(),
+    is_reply : is_reply,//区分主回复还是子回复
     author : {
       author_id : user._id,
       author_name : user.author_name,
@@ -35,7 +38,13 @@ exports.main = async (event, context) => {
     //获取所有评论的索引
     let commentIndex = comments.findIndex(item =>item.comment_id === comment_id);
     //获取回复的作者信息
-    let commentAuthor = comments.find(item =>item.comment_id === comment_id);
+    let commentAuthor = '';
+    //子回复|主回复
+    if(is_reply){
+      commentAuthor = comments[commentIndex].replys.find(item =>{item.comment_id === reply_id});
+    }else{
+      commentAuthor = comments.find(item =>item.comment_id === comment_id);
+    }
     commentAuthor = commentAuthor.author.author_name;
     commentObj.to = commentAuthor;
     //更新回复信息

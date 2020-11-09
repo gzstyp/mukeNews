@@ -98,7 +98,6 @@
       openComponent(){
         //popup是名,即上面的 ref="popup"
         this.$refs.popup.open();
-        this.commentsValue = '';
       },
       //关闭弹窗
       close(){
@@ -117,10 +116,14 @@
         this.setUpdateComment({content:this.commentsValue,...this.replyFormData});
       },
       //回复,有子组件交给父组件处理事件,自定义事件来实现
-      reply(comment){
+      reply(params){
         this.replyFormData = {
-          "comment_id" : comment.comment_id
+          "comment_id" : params.comments.comment_id,
+          "is_reply" : params.is_reply
         };
+        if(params.comments.reply_id){
+          this.replyFormData.reply_id = params.comments.reply_id;
+        }
         this.openComponent();
       },
       setUpdateComment(content){
@@ -138,6 +141,8 @@
               icon : 'none'
             });
             this.getComments();
+            this.commentsValue = '';//成功时输入框清空
+            this.replyFormData = {};//成功时回复信息清空
           }
         }).catch(err =>{
           uni.hideLoading();

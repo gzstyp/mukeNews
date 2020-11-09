@@ -6,7 +6,8 @@
 		    <image :src="comments.author.avatar" mode="aspectFill"></image>
 		  </view>
       <view class="comments-header_info">
-        <view class="title">{{comments.author.author_name}}</view>
+        <view v-if="!comments.is_reply" class="title">{{comments.author.author_name}}</view>
+        <view v-else class="title">{{comments.author.author_name}}<text class="reply-text">回复</text>{{comments.to}}</view>
         <view>{{comments.create_time}}</view>
       </view>
 		</view>
@@ -14,12 +15,12 @@
     <view class="comments-content">
       <view>{{comments.comment_content}}</view>
       <view class="comments-info">
-        <view class="comments-button" @click="commentsReply(comments)">回复</view>
+        <view class="comments-button" @click="commentsReply({comments:comments,is_reply:reply})">回复</view>
       </view>
       <!-- comments.replys 防止因递归导致死循环 -->
       <view class="comments-reply" v-for="item in comments.replys" :key="item.comment_id">
-        <!-- 递归调用 -->
-        <comments-box :comments="item"></comments-box>
+        <!-- 递归调用,标识reply=true表示自己组件调用的,否则就是父组件调用的 -->
+        <comments-box :reply="true" :comments="item" @reply="commentsReply"></comments-box>
       </view>
     </view>
 	</view>
@@ -39,6 +40,10 @@
         default(){
           return {}
         }
+      },
+      reply : {
+        type : Boolean,
+        default : false
       }
     },
 		data() {
@@ -46,6 +51,11 @@
 		},
     methods:{
       commentsReply(comment){
+        //区分是主回复还是子回复
+        if(comment.is_reply){
+          comment.comments.reply_id = comment.comments.comment_id;
+          comment.comments.comment_id = this.comments.comment_id;
+        }
         this.$emit('reply',comment)//事件丢给父组件处理
       }
     }
@@ -79,6 +89,11 @@
           margin-bottom: 10px;
           font-size: 14px;
           color: #333;
+          .reply-text{
+            margin: 0 10px;
+            font-weight: bold;
+            color: #000;
+          }
         }
       }
     }
