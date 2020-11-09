@@ -21,6 +21,7 @@
           <text>{{formData.thumbs_up_count || 0}}点赞</text>
         </view>
       </view>
+      <button class="detail-header_button" type="default" @click="follow(formData.author.id)">关注</button>
     </view>
     <!-- 内容 -->
     <view class="detail-content">
@@ -94,6 +95,9 @@
       this.getComments();
     },
 		methods: {
+      follow(author_id){
+        this.setUpdateAuthor(author_id);
+      },
       //打开评论窗口
       openComponent(){
         //popup是名,即上面的 ref="popup"
@@ -169,6 +173,24 @@
         }).catch(err =>{
           console.log(err);
         });
+      },
+      setUpdateAuthor : function(author_id){
+        const params = {
+          author_id : author_id
+        };
+        uni.showLoading({title:'正在操作……'});
+        this.$api.update_author(params).then(data =>{
+          uni.hideLoading();
+          if(200 === data.code){
+            this.close();
+            uni.showToast({
+              title : data.msg,
+              icon : 'none'
+            });
+          }
+        }).catch(err =>{
+          uni.hideLoading();
+        });
       }
 		}
 	}
@@ -218,6 +240,13 @@
           margin-right: 10px;
         }
       }
+    }
+    .detail-header_button{
+      flex-shrink: 0;
+      height: 30px;
+      font-size: 12px;
+      background-color: $mk-base-color;
+      color: #fff;
     }
   }
   .detail-content{

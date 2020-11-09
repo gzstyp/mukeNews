@@ -35,3 +35,7 @@ export const update_comment = (params) =>{
 export const get_comments = (params) =>{
 	return request('get_comments',params);
 }
+/* 关注或取消关注,用法 this.$api.update_author({}).then(data =>{}).catch(err =>{}); */
+export const update_author = (params) =>{
+	return request('update_author',params);
+}
