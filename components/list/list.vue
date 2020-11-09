@@ -35,14 +35,23 @@
     watch:{
       tab(value){
         if(value.length ===0) return;
-        this.listCatchData = {};//解决key重复的问题
-        this.load = {};//解决key重复的问题
-        this.getList(this.activeIndex);
+        this.refreshData();
       }
     },
     //注意:onLoad 是在页面有效,created在组件里有效
-    created() {},
+    created() {
+      //全局的自定义事件,刷新页面数据
+      uni.$on('update_article',()=>{
+        this.refreshData();
+      });
+    },
     methods : {
+      //刷新数据,用于全局的自定义事件触发
+      refreshData : function(){
+        this.listCatchData = {};//解决key重复的问题
+        this.load = {};//解决key重复的问题
+        this.getList(this.activeIndex);//仅更新被点赞的那个item
+      },
       // 此自定义事件是从 list-scroll.vue 到 list-item.vue 再到 list.vue 本页面
       loadmore(){
         if(this.load[this.activeIndex].loading === 'noMore') return;

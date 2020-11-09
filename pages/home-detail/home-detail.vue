@@ -53,8 +53,8 @@
           <uni-icons :type="formData.is_like ? 'heart-filled' : 'heart'" size="22" color="#f07373"></uni-icons>
         </view>
         <!-- 点赞 -->
-        <view class="detail-bottom_icons_box">
-          <uni-icons type="hand-thumbsup" size="22" color="#f07373"></uni-icons>
+        <view class="detail-bottom_icons_box" @click="thumbsup(formData._id)">
+          <uni-icons :type="formData.is_thumbs_up ? 'hand-thumbsup-filled' : 'hand-thumbsup'" size="22" color="#f07373"></uni-icons>
         </view>
       </view>
     </view>
@@ -95,6 +95,10 @@
       this.getComments();
     },
 		methods: {
+      //点赞
+      thumbsup(article_id){
+        this.setUpdateThumbs(article_id);
+      },
       //收藏
       likeTap(article_id){
         this.setUpdateLike(article_id);
@@ -206,7 +210,7 @@
         };
         uni.showLoading({title:'正在操作……'});//显示正在操作动画
         this.$api.updateLike(params).then(data =>{
-          uni.hideLoading();//功能时隐藏
+          uni.hideLoading();
           if(200 === data.code){
             this.formData.is_like = !this.formData.is_like;
             //提示操作结果
@@ -214,10 +218,33 @@
               title : this.formData.is_like ? '收藏成功' : '取消成功',
               icon : 'none'
             });
+            uni.$emit('update_article');
           }
         }).catch(err =>{
           console.info(err);
-          uni.hideLoading();//失败时隐藏
+          uni.hideLoading();
+        });
+      },
+      setUpdateThumbs(article_id){
+        const params = {
+          "article_id" : article_id
+        };
+        uni.showLoading({title:'正在操作……'});//显示正在操作动画
+        this.$api.update_thumbs(params).then(data =>{
+          uni.hideLoading();
+          if(200 === data.code){
+            if(!this.formData.is_thumbs_up){
+              this.formData.thumbs_up_count++;
+            }
+            this.formData.is_thumbs_up = true;
+            uni.showToast({
+              title : data.msg,
+              icon : 'none'
+            });
+          }
+        }).catch(err =>{
+          console.info(err);
+          uni.hideLoading();
         });
       }
 		}
