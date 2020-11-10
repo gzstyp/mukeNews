@@ -18,7 +18,7 @@
     {
       "path" : "pages/tabbar/my/my",
       "style" : {
-        "navigationBarTitleText" : "我的",
+        "navigationBarTitleText" : "个人中心",
         "enablePullDownRefresh" : false
       }
     },
@@ -51,6 +51,20 @@
       "style" : {
         "navigationBarTitleText" : "评论列表",
         "enablePullDownRefresh" : true
+      }
+    },
+    {
+      "path" : "pages/my-article/my-article",
+      "style" : {
+        "navigationBarTitleText" : "我的文章",
+        "enablePullDownRefresh" : false
+      }
+    },
+    {
+      "path" : "pages/feedback/feedback",
+      "style" : {
+        "navigationBarTitleText" : "意见反馈",
+        "enablePullDownRefresh" : false
       }
     }
   ],

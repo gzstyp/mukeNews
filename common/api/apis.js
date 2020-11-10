@@ -56,3 +56,7 @@ export const get_author = (params) =>{
 export const get_user = (params) =>{
 	return request('get_user',params);
 }
+/* 获取我的文章,用法 this.$api.get_my_article({}).then(data =>{}).catch(err =>{}); */
+export const get_my_article = (params) =>{
+	return request('get_my_article',params);
+}

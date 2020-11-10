@@ -28,7 +28,7 @@
     </view>
     <view class="my-content">
       <!-- 列表的左边一个图标和文字,右边一个箭头图标,所以要包装一层 -->
-      <view class="my-content_list">
+      <view class="my-content_list" @click="myArticle">
         <view class="my-content-list-title">
           <uni-icons class="icons" type="contact" size="16" color="#666"></uni-icons>
           <text>我的文章</text>
@@ -36,7 +36,7 @@
         <uni-icons type="arrowright" size="16" color="#666"></uni-icons>
       </view>
       <!-- 列表的左边一个图标和文字,右边一个箭头图标,所以要包装一层 -->
-      <view class="my-content_list">
+      <view class="my-content_list" @click="feedback">
         <view class="my-content-list-title">
           <uni-icons class="icons" type="help" size="16" color="#666"></uni-icons>
           <text>意见反馈</text>
@@ -58,7 +58,20 @@
       ...mapState(['userinfo'])//取值:{{userinfo.xxx}} 或 this.userinfo;
     },
     onLoad() {},
-		methods: {}
+    methods : {
+      //我的文章
+      myArticle(){
+        uni.navigateTo({
+          url:'/pages/my-article/my-article'
+        });
+      },
+      //意见反馈
+      feedback(){
+        uni.navigateTo({
+          url:'/pages/feedback/feedback'
+        });
+      }
+    }
 	}
 </script>
 
