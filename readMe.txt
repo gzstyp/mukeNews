@@ -27,7 +27,7 @@ uni.$on('update_article',()=>{
 
 让头像图片不被挤压
 .listauthor-image{
-    flex-shrink: 0;/* 让头像图片不被挤压 */
+    flex-shrink: 0;/* 让头像图片不被挤压,为什么要这个属性??? */
     width: 40px;
     height: 40px;
     overflow: hidden;
@@ -35,6 +35,18 @@ uni.$on('update_article',()=>{
       height: 100%;
       width: 100%;
     }
+}
+
+//头像,图片一般要给一个容器包裹,给定宽高度，防止被挤压然后image宽高度100%,这里为什么没有 flex-shrink: 0 属性???,因为不需要也不会被挤压!!!
+.my-header_logo_box{
+  height: 60px;
+  width: 60px;
+  border-radius: 50%;
+  overflow: hidden;
+  image{
+    height: 100%;
+    width: 100%;
+  }
 }
 
 经典的布局样式-开始
