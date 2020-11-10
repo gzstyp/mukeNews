@@ -21,7 +21,7 @@
         </swiper-item>
         <swiper-item>
           <list-scroll>
-            <list-author></list-author>
+            <list-author v-for="item in authorLists" :key="item._id" :item="item"></list-author>
           </list-scroll>
         </swiper-item>
       </swiper>
@@ -33,8 +33,9 @@
 	export default {
 		data() {
 			return {
-        activeIndex : 1,
-        list : [],
+        activeIndex : 0,
+        list : [],//收藏的文章列表
+        authorLists : [],//关注的作者
         articleShow : false//默认不让其显示,等第1次加载玩没有数据时才显示
 			}
 		},
@@ -43,7 +44,12 @@
       uni.$on('update_article',()=>{
         this.gerFollow();
       });
+      //全局的自定义事件,在其它页面或组件关注作者操作时重新获取数据,它只能在已打开的页面才触发!!!
+      uni.$on('update_author',()=>{
+        this.getAuthor();
+      });
       this.gerFollow();
+      this.getAuthor();
     },
 		methods: {
       change(e){
@@ -52,11 +58,22 @@
       tab : function(index){
         this.activeIndex = index;
       },
+      //获取已收藏的文章
       gerFollow(){
         this.$api.get_follow({}).then(result =>{
           const {code,data} = result;
           this.list = data;
           this.articleShow = this.list.length === 0 ? true : false;//因为没有做分页
+        }).catch(err =>{
+          console.info(err);
+        });
+      },
+      //获取已关注的作者
+      getAuthor(){
+        this.$api.get_author({}).then(result =>{
+          const {code,data} = result;
+          this.authorLists = data;
+          //this.articleShow = this.list.length === 0 ? true : false;//因为没有做分页
         }).catch(err =>{
           console.info(err);
         });

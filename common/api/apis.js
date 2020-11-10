@@ -48,3 +48,7 @@ export const update_thumbs = (params) =>{
 export const get_follow = (params) =>{
 	return request('get_follow',params);
 }
+/* 获取已关注的作者,用法 this.$api.get_author({}).then(data =>{}).catch(err =>{}); */
+export const get_author = (params) =>{
+	return request('get_author',params);
+}

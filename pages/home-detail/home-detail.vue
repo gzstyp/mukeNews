@@ -203,6 +203,7 @@
               title : data.msg,// this.formData.is_author_like ? '关注成功' : '取消成功'
               icon : 'none'
             });
+            uni.$emit('update_author');//自定义全局事件名,用于刷新‘关注页面的作者tab’数据
           }
         }).catch(err =>{
           console.log(err);
