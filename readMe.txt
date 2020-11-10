@@ -49,6 +49,13 @@ uni.$on('update_article',()=>{
   }
 }
 
+--------------------------------------------换行--------------------------------------------
+.feedback-images-box{
+  display: flex;
+  flex-wrap: wrap;//换行
+  padding: 10px;
+}
+
 经典的布局样式1-开始
 <template>
 	<view class="listauthor">
