@@ -20,7 +20,9 @@
           </list-scroll>
         </swiper-item>
         <swiper-item>
-          作者
+          <list-scroll>
+            <list-author></list-author>
+          </list-scroll>
         </swiper-item>
       </swiper>
     </view>
@@ -31,7 +33,7 @@
 	export default {
 		data() {
 			return {
-        activeIndex : 0,
+        activeIndex : 1,
         list : [],
         articleShow : false//默认不让其显示,等第1次加载玩没有数据时才显示
 			}

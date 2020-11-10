@@ -37,7 +37,7 @@ uni.$on('update_article',()=>{
     }
 }
 
-经典的布局样式
+经典的布局样式-开始
 <template>
 	<view class="listauthor">
     <view class="listauthor-image">
@@ -118,3 +118,4 @@ uni.$on('update_article',()=>{
     }
   }
 </style>
+经典的布局样式-结束
