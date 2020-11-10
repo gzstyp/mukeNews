@@ -1,6 +1,9 @@
 <template>
 	<view>
     <view class="my-header">
+      <view class="my-header-background">
+        <image src="/static/logo.png" mode="aspectFill"></image>
+      </view>
       <view class="my-header-logo">
         <view class="my-header_logo_box">
           <image src="/static/logo.png" mode="aspectFill"></image>
@@ -21,6 +24,24 @@
           <text class="my-header-info-title">积分</text>
           <text>0</text>
         </view>
+      </view>
+    </view>
+    <view class="my-content">
+      <!-- 列表的左边一个图标和文字,右边一个箭头图标,所以要包装一层 -->
+      <view class="my-content_list">
+        <view class="my-content-list-title">
+          <uni-icons class="icons" type="contact" size="16" color="#666"></uni-icons>
+          <text>我的文章</text>
+        </view>
+        <uni-icons type="arrowright" size="16" color="#666"></uni-icons>
+      </view>
+      <!-- 列表的左边一个图标和文字,右边一个箭头图标,所以要包装一层 -->
+      <view class="my-content_list">
+        <view class="my-content-list-title">
+          <uni-icons class="icons" type="help" size="16" color="#666"></uni-icons>
+          <text>意见反馈</text>
+        </view>
+        <uni-icons type="arrowright" size="16" color="#666"></uni-icons>
       </view>
     </view>
 	</view>
@@ -44,7 +65,22 @@
     background-color: #f5f5f5;
   }
   .my-header{
+    position: relative;
     padding-bottom: 15px;
+    //上部分的虚幻背景,模糊感觉,高度仅在父容器的高度
+    .my-header-background{
+      position: absolute;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      left: 0;
+      filter: blur(8px);/* 模糊 */
+      opacity: 0.3;/* 透明度 */
+      image{
+        width: 100%;
+        height: 100%;
+      }
+    }
     //头像+作者名字的样式
     .my-header-logo{
       display: flex;
@@ -85,6 +121,26 @@
         .my-header-info-title{
           font-size: 14px;
           color: #333;
+        }
+      }
+    }
+  }
+  .my-content{
+    /* 列表的左边一个图标和文字,右边一个箭头图标 */
+    .my-content_list{
+      display:flex;
+      justify-content:space-between;/*使子元素左右对齐*/
+      padding:15px;
+      margin-top: 10px;
+      background-color: #fff;
+      color: #333;
+      font-size: 14px;
+      .my-content-list-title{
+        display: flex;
+        align-items: center;/* 垂直方向排列,即让内容垂直居中对齐 */
+        /* 和左边的文字有点距离 */
+        .icons{
+          margin-right:6px;
         }
       }
     }
