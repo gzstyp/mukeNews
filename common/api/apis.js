@@ -60,3 +60,7 @@ export const get_user = (params) =>{
 export const get_my_article = (params) =>{
 	return request('get_my_article',params);
 }
+/* 意见反馈的提交,用法 this.$api.update_feedback({}).then(data =>{}).catch(err =>{}); */
+export const update_feedback = (params) =>{
+	return request('update_feedback',params);
+}

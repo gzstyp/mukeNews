@@ -4,7 +4,7 @@
     <view class="feedback-title">意见反馈</view>
     <!-- 输入框 -->
     <view class="feedback-content">
-      <textarea class="feedback-textarea" placeholder="请输入你要反馈的问题" />
+      <textarea class="feedback-textarea" v-model="context" placeholder="请输入你要反馈的问题" />
     </view>
     <view class="feedback-title">反馈图片</view>
     <!-- 图片,九宫格的图片展示 -->
@@ -25,7 +25,7 @@
         </view>
       </view>
     </view>
-    <button class="feedback-button" type="primary">提交反馈</button>
+    <button class="feedback-button" type="primary" @click="submitForm">提交反馈</button>
 	</view>
 </template>
 
@@ -34,7 +34,8 @@
 		data() {
 			return {
         imagesLists : [],
-        limit : 5 /* 限制选择图片张数 */
+        limit : 5, /* 限制选择图片张数 */
+        context : ''
 			}
 		},
 		methods: {
@@ -46,10 +47,12 @@
           success : (result) =>{ //或者使用 count _this = this;
             //const {errMsg,tempFilePaths,tempFiles} = result;//返回的参数
             const tempFilePaths = result.tempFilePaths;
+            const tempFiles = result.tempFiles;
             tempFilePaths.forEach((item,index)=>{
               if(index < count){//由于个h5\app\小程序的平台不同,所以只能这样处理
                 this.imagesLists.push({
-                  url : item
+                  url : item,
+                  name : result.tempFiles[index].name
                 });
               }
             });
@@ -59,6 +62,68 @@
       //删除图片
       delImage : function(index){
         this.imagesLists.splice(index,1);
+      },
+      //提交表单，先上传图片完成回调得到返回的数据再提交表单保存
+      submitForm : async function(){
+        if(this.context.length === 0){
+          this.dialog('请输入反馈内容');
+          return;
+        }
+        const imagesPath = [];
+        //因为云存储仅支持单张图片上传,所以要 for 循环
+        const len = this.imagesLists.length;
+        uni.showLoading({title:'正在提交……'});
+        for (let i = 0; i < len; i++){
+          const filePath = this.imagesLists[i].url;
+          const fileName = this.imagesLists[i].name;
+          const result = await this.uploadFile(filePath,fileName);
+          //console.info(result.fileID);//文件唯一 ID，用来访问文件，建议存储起来;
+          //console.info(result.filePath);//请求序列号，用于错误排查;
+          //console.info(result.success);//true|false
+          imagesPath.push(result.fileID);
+        }
+        const params = {
+          feedbackImages : imagesPath,
+          context : this.context
+        };
+        this.$api.update_feedback(params).then(res =>{
+          uni.hideLoading();
+          const {code,data} = res;
+          if(200 === code){
+            this.context = '';
+            this.imagesLists = [];
+            this.dialog('提交成功,感谢参与');
+            setTimeout(()=>{
+              uni.switchTab({
+                url:'/pages/tabbar/my/my'
+              })
+            },1800);
+          }
+        }).catch(err =>{
+          console.info(err);
+          uni.hideLoading();
+        });
+      },
+      dialog : function(msg){
+        uni.showToast({
+          title:msg,
+          icon:'none'
+        });
+      },
+      //同步的方法,因为云服务器仅支持单张图片上传,所以要同步的方法
+      async uploadFile(filePath,fileName){
+        return await uniCloud.uploadFile({
+          filePath : filePath,//要上传的文件对象
+          cloudPath : fileName,//文件的绝对路径?
+          fileType : 'image',//包含文件名,文件类型，支付宝小程序、钉钉小程序必填，可选image、video、audio
+          onUploadProgress : function(progressEvent){//上传进度
+            //console.info(progressEvent);
+            var percentCompleted = Math.round(
+              (progressEvent.loaded * 100) / progressEvent.total
+            );
+            //console.info(percentCompleted);
+          }
+        });
       }
 		}
 	}
