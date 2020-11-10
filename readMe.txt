@@ -58,6 +58,30 @@ uni.$on('update_article',()=>{
 --------------------------------------------换行--------------------------------------------
 
 --------------------------------------------九宫格效果--------------------------------------------
+<!-- 图片,九宫格的图片展示 -->
+<view class="feedback-images-box">
+  <view class="feedback-images-item">
+    <view class="images-box">
+      <image src="/static/logo.png" mode="aspectFill"></image>
+    </view>
+  </view>
+  <view class="feedback-images-item">
+    <view class="images-box">
+      <image src="/static/logo.png" mode="aspectFill"></image>
+    </view>
+  </view>
+  <view class="feedback-images-item">
+    <view class="images-box">
+      <image src="/static/logo.png" mode="aspectFill"></image>
+    </view>
+  </view>
+  <view class="feedback-images-item">
+    <view class="images-box">
+      <image src="/static/logo.png" mode="aspectFill"></image>
+    </view>
+  </view>
+</view>
+
 .images-box{
   display: flex;
   justify-content: center;
