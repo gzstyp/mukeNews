@@ -1,8 +1,10 @@
 <template>
   <list-scroll class="list-scroll" @loadmore="loadmore">
-    <list-card mode="base" :item="item" v-for="item in list" :key="item._id"></list-card>
+    <view>
+      <list-card mode="base" :item="item" v-for="item in list" :key="item._id"></list-card>
+    </view>
     <!-- 此处的 list.length 必须大于(每页大小-1)的数据量 -->
-    <uni-load-more v-if="list.length === 0 || list.length > 9" iconType="snow" :status="load.loading"></uni-load-more>
+    <uni-load-more v-if="list.length === 0 || list.length > 9" iconType="snow" :status="load.loading || 'loading'"></uni-load-more>
   </list-scroll>
 </template>
 

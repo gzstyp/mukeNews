@@ -52,7 +52,7 @@
               if(index < count){//由于个h5\app\小程序的平台不同,所以只能这样处理
                 this.imagesLists.push({
                   url : item,
-                  name : result.tempFiles[index].name
+                  name : result.tempFiles[index].name || item
                 });
               }
             });

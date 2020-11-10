@@ -12,7 +12,8 @@
 </template>
 
 <script>
-	import navbar from '@/components/navbar/navbar.vue'
+  import {mapState} from 'vuex';
+	import navbar from '@/components/navbar/navbar.vue';
 	export default {
 		components:{
 			navbar
@@ -24,6 +25,14 @@
         activeIndex : 0
 			}
 		},
+    computed:{
+      ...mapState(['userinfo'])
+    },
+    watch:{
+      userinfo(val){//监听上面的computed里的userinfo,兼容微信小程序,否则会报错docId必须为字符串或数字
+        this.getLabel();
+      }
+    },
 		onLoad() {
       //接收自定义全局事件,第1个参数是事件名,参数2是传递来的数据
       uni.$on('labelChange',(data)=>{
@@ -32,7 +41,6 @@
         this.activeIndex = 0;//刷新后重新赋值
         this.getLabel();
       });
-			this.getLabel();
 		},
 		methods: {
       change(current){
