@@ -2,27 +2,27 @@
 	<view>
     <view class="my-header">
       <view class="my-header-background">
-        <image src="/static/logo.png" mode="aspectFill"></image>
+        <image :src="userinfo.avatar" mode="aspectFill"></image>
       </view>
       <view class="my-header-logo">
         <view class="my-header_logo_box">
-          <image src="/static/logo.png" mode="aspectFill"></image>
+          <image :src="userinfo.avatar" mode="aspectFill"></image>
         </view>
-        <text class="my-header_name">引路者</text>
+        <text class="my-header_name">{{userinfo.author_name}}</text>
       </view>
       <!-- 关注-->
       <view class="my-header-info">
         <view class="my-header-info_box">
           <text class="my-header-info-title">被关注</text>
-          <text>0</text>
+          <text>{{userinfo.follow_count || 0}}</text>
         </view>
         <view class="my-header-info_box">
           <text class="my-header-info-title">粉丝</text>
-          <text>0</text>
+          <text>{{userinfo.fans_count || 0}}</text>
         </view>
         <view class="my-header-info_box">
           <text class="my-header-info-title">积分</text>
-          <text>0</text>
+          <text>{{userinfo.integral_count || 0}}</text>
         </view>
       </view>
     </view>
@@ -55,11 +55,9 @@
 		},
     //属性计算_实时监听vuex里的数据源数据变化
     computed:{
-      ...mapState(['userinfo'])
+      ...mapState(['userinfo'])//取值:{{userinfo.xxx}} 或 this.userinfo;
     },
-    onLoad() {
-      console.info(this.userinfo);
-    },
+    onLoad() {},
 		methods: {}
 	}
 </script>
