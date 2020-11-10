@@ -9,7 +9,7 @@
       </view>
     </view>
     <view class="follow-list">
-      <swiper class="follow-list-swiper">
+      <swiper class="follow-list-swiper" :current="activeIndex" @change="change">
         <swiper-item>
           <list-scroll>
             <uni-load-more v-if="list.length === 0 && !articleShow" iconType="snow" status="loading"></uni-load-more>
@@ -20,7 +20,7 @@
           </list-scroll>
         </swiper-item>
         <swiper-item>
-          <view class="swiper-item">作者</view>
+          作者
         </swiper-item>
       </swiper>
     </view>
@@ -44,6 +44,9 @@
       this.gerFollow();
     },
 		methods: {
+      change(e){
+        this.activeIndex = e.detail.current;
+      },
       tab : function(index){
         this.activeIndex = index;
       },
