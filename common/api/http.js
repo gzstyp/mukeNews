@@ -1,5 +1,4 @@
-/* import store from '../../store/index.js'; */
-import store from '@/store/index.js';
+import store from '../../store/index.js';
 export default function callPromise(options){
 	const {url,params} = options;
   //js获取vuex状态管理
@@ -12,7 +11,7 @@ export default function callPromise(options){
 	return new Promise((reslove,reject) =>{
 		uniCloud.callFunction({
 			name : url,
-			data : dataObj 
+			data : dataObj
 		}).then(res =>{
       //uni.hideLoading();//隐藏
 			//成功的是 .then(data);
