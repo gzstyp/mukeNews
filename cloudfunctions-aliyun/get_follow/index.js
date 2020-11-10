@@ -22,12 +22,13 @@ exports.main = async (event, context) => {
     is_like : true
   })
   .end();
-  const code = lists.affectedDocs > 0 ? 200 : 201;
-  const msg = lists.affectedDocs  > 0 ? '操作成功' : '暂无数据';
+  const total = lists.affectedDocs;
+  const code = total > 0 ? 200 : 201;
+  const msg = total  > 0 ? '操作成功' : '暂无数据';
 	return {
 		code : code,
 		msg : msg,
 		data : lists.data,
-		total : lists.affectedDocs
+		total : total
 	};
 };

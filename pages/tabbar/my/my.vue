@@ -48,15 +48,19 @@
 </template>
 
 <script>
+  import {mapState} from 'vuex';//它和计算属性一起使用???
 	export default {
 		data() {
-			return {
-
-			}
+			return {}
 		},
-		methods: {
-
-		}
+    //属性计算_实时监听vuex里的数据源数据变化
+    computed:{
+      ...mapState(['userinfo'])
+    },
+    onLoad() {
+      console.info(this.userinfo);
+    },
+		methods: {}
 	}
 </script>
 

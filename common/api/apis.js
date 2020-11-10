@@ -52,3 +52,7 @@ export const get_follow = (params) =>{
 export const get_author = (params) =>{
 	return request('get_author',params);
 }
+/* 获取个人信息,用法 this.$api.get_user({}).then(data =>{}).catch(err =>{}); */
+export const get_user = (params) =>{
+	return request('get_user',params);
+}
