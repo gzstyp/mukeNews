@@ -55,6 +55,27 @@ uni.$on('update_article',()=>{
   flex-wrap: wrap;//换行
   padding: 10px;
 }
+--------------------------------------------换行--------------------------------------------
+
+--------------------------------------------九宫格效果--------------------------------------------
+.images-box{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: absolute;/* 九宫格效果开始 */
+  top: 5px;
+  right: 5px;
+  bottom: 5px;
+  left: 5px;/* 九宫格效果结束 */
+  border: 1px solid #eee;
+  border-radius: 5px;/* 圆角,看起来不那么生硬 */
+  overflow: hidden;
+  image{
+    height: 100%;
+    width: 100%;
+  }
+}
+--------------------------------------------九宫格效果--------------------------------------------
 
 经典的布局样式1-开始
 <template>
