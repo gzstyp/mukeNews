@@ -193,5 +193,8 @@
   .feedback-button{
     margin: 0 14px;
     background-color: $mk-base-color;
+    height: 38px;
+    line-height: 38px;
+    font-size: 16px;
   }
 </style>
