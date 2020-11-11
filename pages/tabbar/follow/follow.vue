@@ -82,7 +82,7 @@
 	}
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss">
   page{
     height: 100%;
     display: flex;
@@ -92,6 +92,7 @@
     display: flex;
     flex-direction: column;
     flex: 1;//让页面撑起来???
+    width: 100%;//这个也可以让页面撑起来
     box-sizing: border-box;/* 若高度是100%没有看到下边框的话,加上这个就可以 */
     .follow-tab{
       height: 30px;
@@ -121,7 +122,7 @@
       }
     }
     .follow-list{
-      flex: 1;//高度直接撑开,即把剩余的宽高度撑满???
+      flex: 1;//高度直接撑开,即把剩余的高度撑满
       .follow-list-swiper{
         height: 100%;
         .swiper-item{
