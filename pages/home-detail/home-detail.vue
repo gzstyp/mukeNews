@@ -291,7 +291,7 @@
       padding-left: 10px;
       display: flex;
       flex-direction: column;/* 垂直排列 */
-      justify-content: space-between;
+      justify-content: space-between;/*子元素两端对齐，项目之间的间隔都相等*/
       font-size: 12px;
       .detail-header_author{
         font-size: 14px;
@@ -346,7 +346,7 @@
     box-sizing: border-box;
     .detail-bottom_input{
       display: flex;
-      justify-content: space-between;/* 左右对齐 */
+      justify-content: space-between;/* 左右对齐，子元素两端对齐，项目之间的间隔都相等*/
       align-items: center;
       margin-left: 10px;
       padding: 0 10px;
@@ -379,7 +379,7 @@
   		background-color: #fff;
   		.popup-header {
   			display: flex;
-  			justify-content: space-between;
+  			justify-content: space-between;/*子元素两端对齐，项目之间的间隔都相等*/
   			font-size: 14px;
   			color: #666;
   			border-bottom: 1px #F5F5F5 solid;

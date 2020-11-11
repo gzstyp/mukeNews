@@ -120,7 +120,7 @@
       margin-bottom:10px;
       .label-header{
         display:flex;
-        justify-content:space-between;
+        justify-content:space-between;/*子元素两端对齐，项目之间的间隔都相等*/
         font-size:14px;
         color:#666;
         padding:10px 15px;

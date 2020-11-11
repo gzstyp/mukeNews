@@ -127,7 +127,7 @@
     .listcard-content{
       display: flex;
       flex-direction: column;
-      justify-content: space-between;
+      justify-content: space-between;/*子元素两端对齐，项目之间的间隔都相等*/
       padding-left: 10px;
       width: 100%;
       .listcard-content_title{
@@ -147,7 +147,7 @@
       }
       .listcard-content_des{
         display: flex;
-        justify-content: space-between;
+        justify-content: space-between;/*子元素两端对齐，项目之间的间隔都相等*/
         font-size: 12px;
         .listcard-content_label{
           display: flex;

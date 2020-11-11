@@ -144,7 +144,7 @@
     /* 列表的左边一个图标和文字,右边一个箭头图标 */
     .my-content_list{
       display:flex;
-      justify-content:space-between;/*使子元素左右对齐*/
+      justify-content:space-between;/*使子元素左右对齐，子元素两端对齐*/
       padding:15px;
       margin-top: 10px;
       background-color: #fff;

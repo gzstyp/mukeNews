@@ -55,7 +55,7 @@
     .listauthor-content{
       display: flex;
       flex-direction: column;/* 让子元素垂直排列对齐;column行[此处是垂直方向的左右对齐] */
-      justify-content: space-between;/* 使子元素左右对齐 */
+      justify-content: space-between;/* 使子元素左右对齐,子元素两端对齐，项目之间的间隔都相等*/
       padding-left: 10px;/* 让左右两边的左边的子元素离左边有点距离 */
       width: 100%;/* 本容器宽度100% */
       .listauthor-content_title{
@@ -68,7 +68,7 @@
       }
       .listauthor-content_des{
         display: flex;
-        justify-content: space-between;/* 让子元素水平排列对齐[此处是水平方向的左右对齐]; */
+        justify-content: space-between;/* 让子元素水平排列对齐[此处是水平方向的左右对齐]; 两端对齐*/
         font-size: 12px;
         .listauthor-content_des_label{
           color: #666;
