@@ -1,6 +1,7 @@
-import Vue from 'vue'
-import App from './App'
+import Vue from 'vue';
+import App from './App';
 import exports from './common/api/exports.js';
+//vuex
 import store from './store/index.js';
 
 Vue.config.productionTip = false;
