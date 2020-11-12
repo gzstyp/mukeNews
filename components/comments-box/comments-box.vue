@@ -8,7 +8,7 @@
       <view class="comments-header_info">
         <view v-if="!comments.is_reply" class="title">{{comments.author.author_name}}</view>
         <view v-else class="title">{{comments.author.author_name}}<text class="reply-text">回复</text>{{comments.to}}</view>
-        <!-- 要是有多个参数就写成 formatTime('name','age');若是一个参数时可以省略参数,直接写成 formatTime -->
+        <!-- 要是有多个参数就写成 formatTime('name','age');若是一个参数时可以省略参数,直接写成 formatTime ;comments.create_time是参数。-->
         <view>{{comments.create_time | formatTime('time')}}</view>
       </view>
 		</view>
@@ -51,7 +51,7 @@
 		data() {
 			return {};
 		},
-    //属性计算?
+    //过滤器,用于一些常见的文本格式化;就是需要将后端传过来的数据"过滤"一哈显示在网页上
     filters:{
       formatTime(time){
         return paraseTime(time);
