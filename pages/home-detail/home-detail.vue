@@ -259,7 +259,7 @@
 	}
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss">
   .detail{
     padding: 15px 0;
     padding-bottom: 54px;/* 预留底部工具栏高度 */
