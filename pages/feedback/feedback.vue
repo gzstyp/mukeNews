@@ -1,7 +1,8 @@
 <template>
 	<view>
+    <titlebar backIcon title="意见反馈"></titlebar>
     <!-- 标题 -->
-    <view class="feedback-title">意见反馈</view>
+    <view class="feedback-title">意见</view>
     <!-- 输入框 -->
     <view class="feedback-content">
       <textarea class="feedback-textarea" v-model="context" placeholder="请输入你要反馈的问题" />

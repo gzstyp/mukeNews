@@ -1,5 +1,6 @@
 <template>
 	<view class="follow">
+    <titlebar title="关注"></titlebar>
     <!-- 切换导航栏 -->
     <view class="follow-tab">
       <view class="follow-tab-box">

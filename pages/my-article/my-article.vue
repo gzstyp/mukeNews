@@ -1,5 +1,6 @@
 <template>
 	<view>
+    <titlebar backIcon title="我的文章"></titlebar>
     <uni-load-more v-if="lists.length ===0" status="loading" ></uni-load-more>
     <list-card v-for="item in lists" :key="item._id" :item="item"></list-card>
   </view>

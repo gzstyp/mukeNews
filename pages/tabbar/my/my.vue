@@ -1,5 +1,6 @@
 <template>
 	<view>
+    <titlebar title="个人中心"></titlebar>
     <view class="my-header">
       <view class="my-header-background">
         <image :src="userinfo.avatar" mode="aspectFill"></image>
@@ -75,7 +76,7 @@
 	}
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss">
   page{
     background-color: #f5f5f5;
   }

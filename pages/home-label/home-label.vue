@@ -1,5 +1,6 @@
 <template>
 	<view class="label">
+    <titlebar backIcon title="标签管理"></titlebar>
     <view class="label-box">
       <view class="label-header">
         <view class="label-title">我的标签</view>

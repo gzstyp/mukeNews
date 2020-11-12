@@ -8,7 +8,7 @@
 			<view class="navbar-content" :class="{search:isSearch}" :style="{height:navBarHeight + 'px',width:windowWidth+'px'}" @click.stop="open">
 				<!-- 返回箭头 -->
         <view v-if="isSearch" class="navbar-content-search-icons" @click="back">
-          <uni-icons type="back" size="22" color="#fff"></uni-icons>
+          <uni-icons type="back" size="24" color="#fff"></uni-icons>
         </view>
         <!-- 非搜索页显示 -->
         <view v-if="!isSearch" class="navbar-search">
@@ -125,6 +125,7 @@
             width: 100%;
 						font-size: 14px;
 						color: #999;
+            padding-top: 2px;
 					}
 				}
         //同级元素,为ture时覆盖样式即可
