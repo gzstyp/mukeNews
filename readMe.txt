@@ -6,6 +6,8 @@
 
 父子关系：index.vue -> navbar.vue
 
+样式的优先级，就是就近原装
+
 flex-direction: column;/* 垂直排列 */
 box-sizing: border-box;/* 若高度是100%没有看到下边框的话,加上这个就可以 */
 

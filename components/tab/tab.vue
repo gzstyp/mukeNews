@@ -51,7 +51,7 @@
       openLabel(){
         uni.navigateTo({
           url:'/pages/home-label/home-label'
-        })
+        });
       }
     }
 	}

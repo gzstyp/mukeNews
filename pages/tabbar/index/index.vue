@@ -28,6 +28,7 @@
     computed:{
       ...mapState(['userinfo'])
     },
+    /* 提示未赋值或undefined可以使用这个来操作 */
     watch:{
       userinfo(val){//监听上面的computed里的userinfo,兼容微信小程序,否则会报错docId必须为字符串或数字
         this.getLabel();
