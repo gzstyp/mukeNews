@@ -1,0 +1,79 @@
+@import "../_style.scss";
+
+.zj-dialog__anim-enter,
+	.zj-dialog__anim-leave-to {
+		opacity: 0;
+	}
+
+	.zj-dialog__anim-enter-active,
+	.zj-dialog__anim-leave-active {
+		transition: opacity 0.5s;
+	}
+
+	.zj-dialog {
+		position: fixed;
+		top: 0;
+		bottom: 0;
+		left: 0;
+		right: 0;
+		z-index: 999;
+		background-color: rgba(0, 0, 0, 0.6);
+		display: flex;
+		flex-direction: column;
+		justify-content: center;
+		align-items: center;
+	}
+
+	.zj-dialog__container {
+		width: 600rpx;
+		background-color: #FFFFFF;
+		border-radius: 5px;
+	}
+	
+	/* 适配 PC端 */
+	@media only screen and (min-width: 768px) {
+		.zj-dialog__container {
+			width: 400px;
+		}
+	}
+
+	.zj-dialog__wrap {
+		padding-top: 15px;
+	}
+	
+	.zj-dialog__title {
+		padding: 0 15px 0;
+		font-size: 18px;
+		text-align: center;
+		color: #666666;
+	}
+
+	.zj-dialog__content {
+		padding: 15px;
+		font-size: 18px;
+		text-align: center;
+	}
+
+	.zj-dialog__btn {
+		border-top: 1px solid #EEEEEE;
+		display: flex;
+		justify-content: space-around;
+	}
+
+	.zj-dialog__btn button {
+		flex: auto;
+		font-size: 18px;
+		background-color: #FFFFFF;
+	}
+
+	.zj-dialog__btn button:after {
+		border: none;
+	}
+	
+	.zj-dialog__cancel {
+		color: #666666 !important;
+	}
+	
+	.zj-dialog__confirm {
+		color: $zj-dialog-primary-color !important;
+	}
