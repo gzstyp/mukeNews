@@ -7,4 +7,4 @@ function ajaxReq(url,params,method){
 //获取标签栏的数据,用法 this.$api.login('http://127.0.0.1:901/login',{username:'admin',password:'1'}).then(data =>{}).catch(err =>{});
 export const login = (url,params) =>{
 	return ajaxReq(url,params,"POST");
-}
+};
