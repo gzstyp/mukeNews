@@ -2,7 +2,7 @@
 	<view>
     <titlebar backIcon title="我的文章"></titlebar>
     <list-card v-for="item in lists" :key="item._id" :item="item"></list-card>
-    <uni-load-more v-if="lists.length === 0 || show" status="loading"></uni-load-more>
+    <uni-load-more v-if="(lists.length === 0 && !show) || show" status="loading"></uni-load-more>
   </view>
 </template>
 
