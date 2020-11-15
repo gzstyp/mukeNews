@@ -17,9 +17,12 @@
         show : false//表示是否显示加载动画
 			}
 		},
+    //页面是onLoad();组件是created();生命周期是onLoad()优先于created()优先于mounted()
     onLoad(){
       this.getMyArticle();
     },
+    created(){},
+    mounted(){},
     //下拉刷新,使用这个要开启 enablePullDownRefresh:true
     onPullDownRefresh: function(){
         this.page = 0;

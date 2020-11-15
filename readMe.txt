@@ -8,6 +8,8 @@
 
 样式的优先级，就是就近原装
 
+生命周期是 onLoad()优先于created()优先于mounted()
+
 flex-direction: column;/* 垂直排列 */
 box-sizing: border-box;/* 若高度是100%没有看到下边框的话,加上这个就可以 */
 
