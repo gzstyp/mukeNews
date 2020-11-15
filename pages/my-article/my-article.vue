@@ -2,7 +2,7 @@
 	<view>
     <titlebar backIcon title="我的文章"></titlebar>
     <list-card v-for="item in lists" :key="item._id" :item="item"></list-card>
-    <uni-load-more v-if="lists.length === 0 || load" status="loading"></uni-load-more>
+    <uni-load-more v-if="lists.length === 0 || show" status="loading"></uni-load-more>
   </view>
 </template>
 
@@ -14,7 +14,7 @@
         pageSize : 5,
         page : 0,
         loadAll : false,//标识是否已全部加载完毕
-        load : false//表示是否显示加载动画
+        show : false//表示是否显示加载动画
 			}
 		},
     onLoad(){
@@ -35,7 +35,7 @@
       getMyArticle(){
         if(this.loadAll)return;
         this.page++;
-        this.load = true;
+        this.show = true;
         this.$api.get_my_article({page:this.page,pageSize:this.pageSize}).then(result =>{
           this.stopPullDown();
           const {code,data} = result;
@@ -58,7 +58,7 @@
       },
       stopPullDown(){
         uni.stopPullDownRefresh();
-        this.load = false;
+        this.show = false;
       }
 		}
 	}
