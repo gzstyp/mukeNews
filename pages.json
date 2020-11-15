@@ -62,7 +62,7 @@
       "path" : "pages/my-article/my-article",
       "style" : {
         "navigationBarTitleText" : "我的文章",
-        "enablePullDownRefresh" : false,
+        "enablePullDownRefresh" : true,
         "navigationBarTextStyle" : "white",
         "navigationStyle" : "custom"
       }

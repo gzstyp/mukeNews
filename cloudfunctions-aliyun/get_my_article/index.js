@@ -7,6 +7,10 @@ const aggre = db.command.aggregate;
 const dbCmd = db.command;
 exports.main = async (event, context) => {
   const user_id = event.user_id;
+
+  const page = event.page;//当前页数
+  const pageSize = event.pageSize;//每页大小
+
   let userInfo = await db.collection('user').doc(user_id).get();
   userInfo = userInfo.data[0];//返回的是对象{}
   //使用聚合函数处理,更精细化的处理数据,求和，分组，指定字段
@@ -21,7 +25,10 @@ exports.main = async (event, context) => {
       id : dbCmd.in(userInfo.article_ids)//过滤,如果存在就返回,不存在就不返回
     }
   )
+  .skip(pageSize * (page - 1))
+  .limit(pageSize)
   .end();
+  
   const total = lists.affectedDocs;
   const code = total > 0 ? 200 : 201;
   const msg = total > 0 ? '操作成功' : '暂无数据';

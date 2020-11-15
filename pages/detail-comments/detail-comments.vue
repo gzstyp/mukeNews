@@ -32,7 +32,7 @@
     //监听用户下拉动作,需要在 pages.json 里开启 enablePullDownRefresh:true
     onPullDownRefresh(){
       this.page = 0;
-      this.enablePullRefresh = true;
+      this.enablePullRefresh = true;//注意顺序!!!
       this.getComments();
     },
 		methods: {
