@@ -75,6 +75,15 @@
         "navigationBarTextStyle" : "white",
         "navigationStyle" : "custom"
       }
+    },
+    {
+      "path" : "pages/tabbar/my/help",
+      "style" : {
+        "navigationBarTitleText" : "帮助中心",
+        "enablePullDownRefresh" : false,
+        "navigationBarTextStyle" : "white",
+        "navigationStyle" : "custom"
+      }
     }
   ],
   "globalStyle" : {

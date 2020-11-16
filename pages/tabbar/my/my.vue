@@ -44,6 +44,13 @@
         </view>
         <uni-icons type="arrowright" size="16" color="#666"></uni-icons>
       </view>
+      <view class="my-content_list" @click="help">
+        <view class="my-content-list-title">
+          <uni-icons class="icons" type="help" size="16" color="#666"></uni-icons>
+          <text>帮助中心</text>
+        </view>
+        <uni-icons type="arrowright" size="16" color="#666"></uni-icons>
+      </view>
     </view>
 	</view>
 </template>
@@ -70,6 +77,12 @@
       feedback(){
         uni.navigateTo({
           url:'/pages/feedback/feedback'
+        });
+      },
+      //帮助中心
+      help(){
+        uni.navigateTo({
+          url:'/pages/tabbar/my/help'
         });
       }
     }
