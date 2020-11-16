@@ -51,6 +51,13 @@
         </view>
         <uni-icons type="arrowright" size="16" color="#666"></uni-icons>
       </view>
+      <view class="my-content_list" @click="loginWechat">
+        <view class="my-content-list-title">
+          <uni-icons class="icons" type="weixin" size="16" color="#666"></uni-icons>
+          <text>微信登录</text>
+        </view>
+        <uni-icons type="arrowright" size="16" color="#666"></uni-icons>
+      </view>
     </view>
 	</view>
 </template>
@@ -83,6 +90,12 @@
       help(){
         uni.navigateTo({
           url:'/pages/tabbar/my/help'
+        });
+      },
+      //微信登录
+      loginWechat(){
+        uni.navigateTo({
+          url:'/pages/tabbar/my/wechatLogin'
         });
       }
     }

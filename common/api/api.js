@@ -8,3 +8,7 @@ function ajaxReq(url,params,method){
 export const login = (url,params) =>{
 	return ajaxReq(url,params,"POST");
 };
+//获取openId,这个业务放在服务端来完成,防止 appid 和 secret 被盗
+export const wechatLogin = (url,params) =>{
+	return ajaxReq(url,params);
+};

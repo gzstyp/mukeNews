@@ -84,6 +84,15 @@
         "navigationBarTextStyle" : "white",
         "navigationStyle" : "custom"
       }
+    },
+    {
+      "path" : "pages/tabbar/my/wechatLogin",
+      "style" : {
+        "navigationBarTitleText" : "微信登录",
+        "enablePullDownRefresh" : false,
+        "navigationBarTextStyle" : "white",
+        "navigationStyle" : "custom"
+      }
     }
   ],
   "globalStyle" : {
