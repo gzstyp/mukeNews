@@ -32,7 +32,13 @@
     },
     // 加载更多
     onReachBottom:function(){
-        this.getMyArticle();
+      this.getMyArticle();
+    },
+    loading(){
+      uni.showLoading({
+        title:'正在加载……'
+        //icon: "none",
+      });
     },
 		methods: {
       getMyArticle(){
