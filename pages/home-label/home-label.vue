@@ -88,8 +88,8 @@
         this.show = true;
         this.$api.getLabel({type : 'all'}).then(data =>{
           this.show = false;
-          this.labelList = data.data.filter(item => item.current);
-          this.list = data.data.filter(item => !item.current);
+          this.labelList = data.data.filter(item => item.current);//过滤并返回
+          this.list = data.data.filter(item => !item.current);//过滤并返回
         }).catch(err =>{
           this.show = false;
         	console.info(err);

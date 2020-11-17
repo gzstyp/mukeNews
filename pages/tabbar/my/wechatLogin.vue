@@ -41,10 +41,7 @@
         });
         //#endif
         //#ifdef H5
-        uni.showToast({
-          title:'H5不支持微信登录',
-          icon:'none'
-        })
+        this.dialog('H5不支持微信登录');
         //#endif
       },
       //获取openId,这个业务放在服务端来完成,防止 appid 和 secret 被盗
@@ -74,7 +71,7 @@
             uni.$emit('loginInfo',infoRes.userInfo);
             _this.getOpenId(code);
         	},
-        	fail(err){
+        	fail : (err) =>{
         		console.info(err);
         	}
         });

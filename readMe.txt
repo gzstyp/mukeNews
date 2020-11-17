@@ -10,6 +10,9 @@
 
 生命周期是 onLoad()优先于created()优先于mounted()
 
+this.labelList = data.data.filter(item => item.current);//过滤并返回
+this.list = data.data.filter(item => !item.current);//过滤并返回
+
 flex-direction: column;/* 垂直排列 */
 box-sizing: border-box;/* 若高度是100%没有看到下边框的话,加上这个就可以 */
 

@@ -72,9 +72,7 @@
     methods : {
       back(){
         //uni.navigateBack({})//在h5平台下可能会有问题,不推荐,因一开始就打开该页面那点返回还是当前页,因为页面栈之前就没有页面
-        uni.switchTab({
-          url :'/pages/tabbar/index/index'
-        })
+        this.switchTab('/pages/tabbar/index/index');
       },
       open(){
         if(this.isSearch) return;//是在搜索页时不跳转页面

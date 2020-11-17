@@ -95,20 +95,12 @@
             this.imagesLists = [];
             this.dialog('提交成功,感谢参与');
             setTimeout(()=>{
-              uni.switchTab({
-                url:'/pages/tabbar/my/my'
-              })
+              this.switchTab('/pages/tabbar/my/my');
             },1800);
           }
         }).catch(err =>{
           console.info(err);
-          uni.hideLoading();
-        });
-      },
-      dialog : function(msg){
-        uni.showToast({
-          title:msg,
-          icon:'none'
+          uni.hideLoading(); 
         });
       },
       //同步的方法,因为云服务器仅支持单张图片上传,所以要同步的方法
