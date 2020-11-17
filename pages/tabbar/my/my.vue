@@ -3,13 +3,13 @@
     <titlebar title="个人中心"></titlebar>
     <view class="my-header">
       <view class="my-header-background">
-        <image :src="userinfo.avatar" mode="aspectFill"></image>
+        <image :src="person.avatarUrl || userinfo.avatar" mode="aspectFill"></image>
       </view>
       <view class="my-header-logo">
         <view class="my-header_logo_box">
-          <image :src="userinfo.avatar" mode="aspectFill"></image>
+          <image :src="person.avatarUrl || userinfo.avatar" mode="aspectFill"></image>
         </view>
-        <text class="my-header_name">{{userinfo.author_name}}</text>
+        <text class="my-header_name">{{person.nickName || userinfo.author_name}}</text>
       </view>
       <!-- 关注-->
       <view class="my-header-info">
@@ -66,13 +66,23 @@
   import {mapState} from 'vuex';//它和计算属性一起使用???
 	export default {
 		data() {
-			return {}
+			return {
+        person : {}
+      }
 		},
     //属性计算_实时监听vuex里的数据源数据变化
     computed:{
       ...mapState(['userinfo'])//取值:{{userinfo.xxx}} 或 this.userinfo;
     },
+    //注意:onLoad 是在页面有效,created在组件里有效
     onLoad() {},
+    //注意:onLoad 是在页面有效,created在组件里有效
+    created() {
+      //全局的自定义事件,刷新页面数据,它只能在已打开的页面才触发!!!
+      uni.$on('loginInfo',(userinfo)=>{
+        this.person = userinfo;
+      });
+    },
     methods : {
       //我的文章
       myArticle(){

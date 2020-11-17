@@ -6,7 +6,8 @@ const store = new Vuex.Store({
   //数据源
   state : {
     userinfo : uni.getStorageSync('USERINFO') || {},
-    historyLists : uni.getStorageSync('keyHistory') || []
+    historyLists : uni.getStorageSync('keyHistory') || [],
+    loginInfo : uni.getStorageSync('loginInfo') || {},
   },
   //提供修改数据源的方法;对外提供修改数据源[state]的方法,它可以改变 state 数据源的数据
   mutations : {
@@ -19,6 +20,9 @@ const store = new Vuex.Store({
     },
     CLEAR_HISTORY(state){
       state.historyLists = [];
+    },
+    set_login_info(state,provider){
+      state.loginInfo = provider;
     }
   },
   //它和mutations的功能差不多,仅能调用mutations里的方法来修改数据源,所以它不能直接修改数据源,这里可以执行任意的异步操作
@@ -39,6 +43,11 @@ const store = new Vuex.Store({
     clearHistory({commit}){
       uni.removeStorageSync('keyHistory');
       commit('CLEAR_HISTORY');
+    },
+    //调用方式;this.$store.dispatch('setLoginInfo',数据);
+    setLoginInfo({commit,state},provider){
+      commit('set_login_info',provider);
+      uni.setStorageSync('loginInfo',provider);
     }
   }
 })
