@@ -10,8 +10,15 @@
 
 生命周期是 onLoad()优先于created()优先于mounted()
 
+ES6数组操作
 this.labelList = data.data.filter(item => item.current);//过滤并返回
 this.list = data.data.filter(item => !item.current);//过滤并返回
+let commentIndex = comments.findIndex(item =>item.comment_id === comment_id);
+const newArrIds = [];
+lists.forEach(item =>{
+  newArrIds.push(item._id);
+});
+console.info(newArrIds);
 
 flex-direction: column;/* 垂直排列 */
 box-sizing: border-box;/* 若高度是100%没有看到下边框的话,加上这个就可以 */

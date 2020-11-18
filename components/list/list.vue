@@ -89,7 +89,7 @@
             let oldLoad = {};
             oldLoad.loading = 'noMore';
             oldLoad.page = this.load[current].page;
-            this.$set(this.load,current,oldLoad);
+            this.$set(this.load,current,oldLoad);//懒加载,通知页面的数组或对象已发生变化,进行刷新
             this.$forceUpdate();//强制刷新页面
             return;
           }
