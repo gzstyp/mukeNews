@@ -18,6 +18,19 @@ box-sizing: border-box;/* 若高度是100%没有看到下边框的话,加上这�
 
 APP直接可以获取到 info.userInfo.unionId
 
+思路有两种：
+
+　　第一种：（ 前端判断是否有 unionid ）在向后端上传 code 并且后端返回数据以后，
+前端判断返回值中是否有 unionid 或者 unionid 是否为 null，null 的情况下去调用带有用户登录态的wx.getUserInfo()，
+然后再将微信返回的  encryptedData 和 iv 返回给后端，后端解密出相应的信息后再返回给前端；
+
+　　第二种：（ 后端判断是否有 unionid ）前端在调用 wx.getUserInfo() 时候带着登录态，
+然后不管后台能不能拿到 unionid，都把 encryptedData 和 iv 返回给后端，
+后端在拿到前端 code 之后去请求微信的接口拿 unionid，如果返回的 unionid 为空，
+再拿前端传的 encryptedData、iv以及之前的 session_key 解密出 unionid。
+
+小程序和微信公众平台需要绑定同一个微信开放平台，即通过登录公众号，‘小程序管理’关联小程序???
+
 /pages/home-detail/home-detail.vue 页面详情
 /pages/detail-comments/detail-comments.vue 文章评论列表
 /pages/home-label/home-label.vue 标签管理页面
