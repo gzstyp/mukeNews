@@ -16,6 +16,8 @@ this.list = data.data.filter(item => !item.current);//过滤并返回
 flex-direction: column;/* 垂直排列 */
 box-sizing: border-box;/* 若高度是100%没有看到下边框的话,加上这个就可以 */
 
+APP直接可以获取到 info.userInfo.unionId
+
 /pages/home-detail/home-detail.vue 页面详情
 /pages/detail-comments/detail-comments.vue 文章评论列表
 /pages/home-label/home-label.vue 标签管理页面
