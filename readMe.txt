@@ -1,3 +1,53 @@
+Flex布局原理总结
+Flex布局原理就是：给父盒子添加flex属性，来控制子盒子的位置排列方式从而实现flex布局
+
+n当我们为父盒子设为 flex 布局以后，子元素的 float、clear 和 vertical-align 属性将失效。
+
+nFlex布局又叫伸缩布局、弹性布局、伸缩盒布局、弹性盒布局、flex布局
+
+以下是Flex布局父项常见属性(父容器)
+---------------------------------------------------------------------------------------------------
+flex-direction:column;将主轴改为y轴，纵轴
+flex-direction:row; 将主轴改为x轴，横轴
+flex-direction:row- reverse;主轴为x轴，并且翻转
+flex-direction:column- reverse;主轴为y轴，并且翻转
+
+通过justify-content能够设置主轴子元素排列形式:
+值为flex-start 所有子元素在主轴头部显示
+值为flex-end 所有子元素在主轴尾部显示
+值为flex-center 所有子元素在主轴居中对齐
+值为space-around 所有子元素平分剩余空间
+值为space-between 所有子元素先两边贴边在平分剩余空间
+
+开启flex布局后默认为不换行,如果想要换行效果设置flex-wrap：wrap
+
+-- 单行
+利用align-items能够设置侧轴元素对齐的方式在子项为单项（单行）的时候使用[Aligin-items只能设置在子盒子为单行的情况来设置，如果我们的子盒子多行该怎么来设置]
+align-items的值为flex-start 表示从头开始
+align-items的值为flex-end 表示从结尾开始
+align-items的值为center 表示居中显示
+align-items的值为stretch 会将子元素拉伸
+
+-- 多行
+Align-content适应于换行（多行）的情况下（单行情况下无效）， 可以设置 上对齐、 下对齐、居中、拉伸以及平均分配剩余空间等属性值
+nAlign-item和align-content的区别单行找 align-items  多行找align-content
+
+Flex-flow就是flex-direction和flex-wrap的合写
+
+---------------------------------------------------------------------------------------------------
+
+***************************************************************************************************
+Flex布局子项常见属性,总结：
+Flex用来设置分配剩余空间的比列的
+剩余空间是指父盒子的宽度减去没有设置flex的盒子的宽度
+在将剩余空间按占比分配给各个子盒子
+比列计算：当前子盒子的flex数值/所有flex的总和
+
+利用nth-child（-n+2）去掉后面两个的边框
+再利用nth-child(-n+2)选择器将前两个nav-items设置右侧边框，然后再利用nth-child(1)将第一个子元素的背景设置完善
+***************************************************************************************************
+
+
 调用组件关系
 
 父子关系：index.vue ->list.vue -> list-item.vue -> list-card.vue
