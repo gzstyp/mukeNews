@@ -10,7 +10,7 @@
 
 生命周期是 onLoad()优先于created()优先于mounted()
 
-ES6数组操作
+ES6数组操作-开始
 this.labelList = data.data.filter(item => item.current);//过滤并返回
 this.list = data.data.filter(item => !item.current);//过滤并返回
 let commentIndex = comments.findIndex(item =>item.comment_id === comment_id);
@@ -19,6 +19,19 @@ lists.forEach(item =>{
   newArrIds.push(item._id);
 });
 console.info(newArrIds);
+
+var _of = this.storedb.state.listStyle.indexOf(kid);
+	if(bl){
+		if(_of == -1){
+			this.storedb.state.listStyle.push(kid);
+		}else{
+			this.storedb.state.listStyle.splice(_of,1);
+		}
+	}else{
+		this.storedb.state.listStyle.splice(_of,1);
+	}
+	console.info(this.storedb.state.listStyle);
+ES6数组操作-结束
 
 flex-direction: column;/* 垂直排列 */
 box-sizing: border-box;/* 若高度是100%没有看到下边框的话,加上这个就可以 */
