@@ -16,6 +16,7 @@
     <template v-if="personInfo">
       <image :src="personInfo.avatarUrl" mode="aspectFill"></image>
     </template>
+    <grids></grids>
 	</view>
 </template>
 
