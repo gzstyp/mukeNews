@@ -401,3 +401,55 @@ export default function callPromise(options){
 ♥♥♥♥♥♥♥♥♥♥♥♥
 
 九宫格-样式在 pages\tabbar\my\wechatLogin.vue
+
+上边滚动下边固定布局-开始
+<template>
+	<view>
+		<titlebar backIcon title="从业人员监测" @clickBack="clickBack"></titlebar>
+    <view class="content-container" style="height:1300px;">
+    </view>
+    <view class="botton-backtrack" hover-class="botton-backtrack-hover">
+    	<text>提交</text>
+    </view>
+	</view>
+</template>
+
+<script>
+	export default {
+		data() {
+			return {}
+		},
+		methods: {
+      clickBack(){
+        this.switchTab('/pages/tabbar/index');
+      }
+		}
+	}
+</script>
+
+<style lang="scss">
+  page{
+    background-color: #f5f5f5;
+  }
+  .content-container{
+    margin-bottom: 40px;/* 底部按钮的高度 */
+  }
+  /* 按钮 */
+  .botton-backtrack{
+  	   height:40px;
+  	   line-height: 40px;
+  	   width: 100%;
+  	   text-align: center;
+  	   background: $mk-base-color;
+  	   color: #ffffff;
+  	   display: flex;
+  	   justify-content: center;
+  	   position:fixed;
+  	   bottom:0px;
+  	   z-index: 10;
+  }
+  .botton-backtrack-hover{
+       background: #179cef;
+  }
+</style>
+上边滚动下边固定布局-结束
