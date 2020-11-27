@@ -5,6 +5,24 @@ n当我们为父盒子设为 flex 布局以后，子元素的 float、clear 和 
 
 nFlex布局又叫伸缩布局、弹性布局、伸缩盒布局、弹性盒布局、flex布局
 
+width:100vw;
+height:100vh;
+
+2n偶数 2n-1|2n+1奇数 3n最后一列 3n+1|3n-2第一列 3n-1中间列
+
+/* 添加边框 */
+.nav li {
+  border-right: 1px solid #666;
+}
+为最后一个元素去除边框
+.nav li:last-child {
+  border-right: none;
+}
+不过不要这么做，使用 :not() 伪类来达到同样的效果：
+.nav li:not(:last-child) {
+  border-right: 1px solid #666;
+}
+
 以下是Flex布局父项常见属性(父容器)
 ---------------------------------------------------------------------------------------------------
 flex-direction:column;将主轴改为y轴，纵轴
