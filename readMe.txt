@@ -471,3 +471,52 @@ export default function callPromise(options){
   }
 </style>
 上边滚动下边固定布局-结束
+
+/**4个按钮*/
+.container0{
+    transform: translate(-50%,-50%);
+    text-align: center;
+    .btn{
+      border: none;
+      margin: 20px;
+      padding: 24px;
+      width: 220px;
+      border-radius: 6px;
+      cursor: pointer;
+      color: #fff;
+      background-size: 200%;
+      transition: 0.6s;
+      &.btn1{
+        background-image: linear-gradient(to left,#ffc312,#ee5a24,#ffc312);
+      }
+      &.btn2{
+        background-image: linear-gradient(to left,#c4e538,#009432,#c4e538);
+      }
+      &.btn3{
+        background-image: linear-gradient(to left,#12cbc4,#0652dd,#12cbc4);
+      }
+      &.btn4{
+        background-image: linear-gradient(to left,#fda7df,#9980fa,#fda7df);
+      }
+      &:hover{
+        background-position: right;
+      }
+    }
+  }
+/**4个按钮*/
+
+不要滚动条?
+  让竖条没有:
+    <body style='overflow:scroll;overflow-y:hidden'>
+    </body>
+  让横条没有:
+    <body style='overflow:scroll;overflow-x:hidden'>
+    </body>
+  两个都去掉？更简单了
+    <body scroll="no">
+    </body>
+------------------出现垂直滚动条------------------
+.swiper-item-container{
+    overflow:scroll;
+    overflow-x:hidden;
+  }
